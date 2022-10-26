@@ -7455,11 +7455,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\i5 9th gen\\Desktop\\TanginangCapstone\\POSCapstone\\Capstone.csproj",
+      "projectUniqueName": "C:\\Users\\i5 9th gen\\source\\repos\\HeidisCapstoneProject\\Capstone.csproj",
       "projectName": "Capstone",
-      "projectPath": "C:\\Users\\i5 9th gen\\Desktop\\TanginangCapstone\\POSCapstone\\Capstone.csproj",
+      "projectPath": "C:\\Users\\i5 9th gen\\source\\repos\\HeidisCapstoneProject\\Capstone.csproj",
       "packagesPath": "C:\\Users\\i5 9th gen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\i5 9th gen\\Desktop\\TanginangCapstone\\POSCapstone\\obj\\",
+      "outputPath": "C:\\Users\\i5 9th gen\\source\\repos\\HeidisCapstoneProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\i5 9th gen\\AppData\\Roaming\\NuGet\\NuGet.Config",
