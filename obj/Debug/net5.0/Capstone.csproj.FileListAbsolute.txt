@@ -1210,3 +1210,4 @@ C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\refint\C
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Capstone.pdb
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Capstone.genruntimeconfig.cache
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\ref\Capstone.dll
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\testing.cshtml.g.cs

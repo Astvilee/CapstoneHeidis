@@ -70,16 +70,16 @@ namespace Capstone.Repository
                 model.Id = item.Id;
                 model.Description = item.Description;
                 model.Image = pbi.Path;
-                if (item.PromoStatus == true)
-                {
-                    model.Name = item.PromoName;
-                    model.Price = item.PromoPrice;
-                }
-                else
-                {
-                    model.Name = item.BaseName;
-                    model.Price = item.BasePrice;
-                }
+                //if (item.PromoStatus == true)
+                //{
+                //    model.Name = item.PromoName;
+                //    model.Price = item.PromoPrice;
+                //}
+                //else
+                //{
+                model.Name = item.BaseName;
+                model.Price = item.BasePrice;
+                //}
                 products.Add(model);
             }
 
@@ -263,6 +263,17 @@ namespace Capstone.Repository
                 }
             }
             _context.SaveChanges();
+        }
+        public List<ManageInvetoryViewModel> getInventory()
+        {
+            var ListOfProducts = _context.Products.Select(m => new ManageInvetoryViewModel()
+            {
+                Id = m.Id,
+                BaseName = m.BaseName,
+                Price = m.BasePrice.ToString(),
+                Stocks = m.Stocks
+            }).ToList();
+            return ListOfProducts;
         }
     }
 }

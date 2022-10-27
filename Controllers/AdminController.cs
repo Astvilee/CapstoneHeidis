@@ -120,7 +120,7 @@ namespace Capstone.Controllers
             _userRepository.CreateOrUpdate(new UserViewModel() { Id = user.Id, Email = user.Email, Password = user.Password, Role =  FunctionHelper.GetRoleList()[int.Parse(user.Role)], Barangay = FunctionHelper.GetBarangayList()[int.Parse(user.Barangay)], StreetAddress = user.StreetAddress, Phone = phoneNumber, Profile = user.Profile });
             return Redirect("/Admin/ManageAccount");
         }
-
+        
         public IActionResult RemoveUser(string id)
         {
             return Json(new { Success = _userRepository.RemoveUser(id) });
@@ -132,5 +132,12 @@ namespace Capstone.Controllers
             return Json(new { Success = true, Barangay = b.index, Role = r.index });
         }
 
+        public IActionResult ManageInventory()
+        {
+            List<ManageInvetoryViewModel> ListOfProduct = new List<ManageInvetoryViewModel>();
+            ListOfProduct = _productRepository.getInventory();
+            ViewBag.ListOfProduct = ListOfProduct;
+            return View();
+        }
     }
 }

@@ -19,5 +19,6 @@ namespace Capstone.Repository.IRepository
         ManageOrderViewModel GetAllUserOrders();
         void ApproveOrder(string orderId);
         void ConfirmOrder(string orderId);
+        List<ManageInvetoryViewModel> getInventory();
     }
 }

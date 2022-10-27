@@ -17,15 +17,13 @@ namespace Capstone.Data
         public ProductBaseImage BaseImage { get; set; }
         public string BaseName { get; set; }
         public double BasePrice { get; set; }
-        public bool PromoStatus { get; set; }
-        public string PromoName { get; set; }
         public string Description { get; set; }
         [ForeignKey("ProductPromoImages")]
         public ProductPromoImage PromoImage { get; set; }
-        public double PromoPrice { get; set; }
-        public int PromoQuantity { get; set; }
+       
         public bool IsActive { get; set; }
         public ICollection<ProductOrder> ProductOrders { get; set; } 
         public ICollection<CartProduct> CartProducts { get; set; } 
+        public int Stocks { get; set; }
     }
 }
