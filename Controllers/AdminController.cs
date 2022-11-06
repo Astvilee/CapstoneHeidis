@@ -139,5 +139,13 @@ namespace Capstone.Controllers
             ViewBag.ListOfProduct = ListOfProduct;
             return View();
         }
+        [HttpPost]
+        public IActionResult UpdateInventory(ManageInvetoryViewModel data)
+        {
+            _productRepository.UpdateInventory(data);
+            return Json(new { Success = "Success"});
+
+        }
+       
     }
 }

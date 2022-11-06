@@ -946,7 +946,6 @@ C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\Sys
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Buffers.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Collections.Concurrent.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Collections.dll
-C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Collections.Immutable.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Collections.NonGeneric.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Collections.Specialized.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.ComponentModel.Annotations.dll
@@ -1061,7 +1060,6 @@ C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\Sys
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Security.SecureString.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.ServiceModel.Web.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.ServiceProcess.dll
-C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Text.Encoding.CodePages.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Text.Encoding.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Text.Encoding.Extensions.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Text.Encodings.Web.dll
@@ -1210,4 +1208,6 @@ C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\refint\C
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Capstone.pdb
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Capstone.genruntimeconfig.cache
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\ref\Capstone.dll
-C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\testing.cshtml.g.cs
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\_UpdateProduct.cshtml.g.cs
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Collections.Immutable.dll
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\refs\System.Text.Encoding.CodePages.dll

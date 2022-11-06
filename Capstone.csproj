@@ -7,8 +7,6 @@
 
   <ItemGroup>
     <None Include="Views\Admin\Index.cshtml" />
-    <None Include="Views\Admin\Inventory.cshtml" />
-    <None Include="Views\Admin\Login.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

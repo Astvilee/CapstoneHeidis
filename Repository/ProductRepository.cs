@@ -275,5 +275,19 @@ namespace Capstone.Repository
             }).ToList();
             return ListOfProducts;
         }
+
+        public void UpdateInventory(ManageInvetoryViewModel Inv)
+        {
+
+            var model = _context.Products.FirstOrDefault(m => m.Id == Inv.Id);
+            _context.Entry(model).CurrentValues.SetValues(new Product()
+            {
+                Id =Inv.Id,
+                BaseName=Inv.BaseName,
+                Stocks = Inv.Stocks,
+                BasePrice = double.Parse(Inv.Price),
+            });
+            _context.SaveChanges();
+        }
     }
 }

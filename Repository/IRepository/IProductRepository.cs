@@ -1,4 +1,5 @@
-﻿using Capstone.ViewModels;
+﻿using Capstone.Data;
+using Capstone.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,7 @@ namespace Capstone.Repository.IRepository
         void ApproveOrder(string orderId);
         void ConfirmOrder(string orderId);
         List<ManageInvetoryViewModel> getInventory();
+
+        void UpdateInventory(ManageInvetoryViewModel inv); 
     }
 }
