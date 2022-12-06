@@ -9,6 +9,7 @@ using Capstone.ActionFilters;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Capstone.Data;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Capstone.Controllers
 {
@@ -59,10 +60,10 @@ namespace Capstone.Controllers
         }
         public IActionResult Profile()
         {
-            if(_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
+            if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
-                return View("Profile", new ProfileViewModel() { EmailAddress = user.Email, PhoneNumber = user.Phone, Address = $"{user.StreetAddress} {user.Barangay}"});
+                return View("Profile", new ProfileViewModel() { EmailAddress = user.Email, PhoneNumber = user.Phone, Address = $"{user.StreetAddress} {user.Barangay}" });
             }
             else
             {
@@ -77,9 +78,10 @@ namespace Capstone.Controllers
 
         public IActionResult ViewOrders()
         {
-            if(_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
+            if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
+                ViewBag.UserId = user.Id;
                 return View("ViewOrders", _productRepository.GetUserOrders(user));
             }
             else
@@ -98,7 +100,7 @@ namespace Capstone.Controllers
 
         public IActionResult Cart()
         {
-            if(_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
+            if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 return View("Cart", _userRepository.GetCartViewModel(_sessionService.GetItems(SessionKeys.User, HttpContext)));
             }
@@ -109,7 +111,7 @@ namespace Capstone.Controllers
         }
         public IActionResult CheckoutOrder()
         {
-            if(_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
+            if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
                 _productRepository.CheckoutOrder(user);
@@ -123,10 +125,10 @@ namespace Capstone.Controllers
 
         public IActionResult GetTotalCartItem()
         {
-            if(_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
+            if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
-                return Json(new { Success = true, total = _productRepository.GetTotalCartItem(user) });
+                return Json(new { Success = true, total = _productRepository.GetTotalCartItem(user) });
             }
             else
             {
@@ -137,7 +139,7 @@ namespace Capstone.Controllers
 
         public IActionResult AddToCart(string id)
         {
-            if(_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
+            if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
                 _productRepository.AddCartItem(user, id);
@@ -150,7 +152,7 @@ namespace Capstone.Controllers
         }
         public IActionResult SubtractToCart(string id)
         {
-            if(_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
+            if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
                 _productRepository.SubtractCartItem(user, id);
@@ -164,7 +166,7 @@ namespace Capstone.Controllers
 
         public IActionResult RemoveToCart(string id)
         {
-            if(_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
+            if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
                 _productRepository.RemoveCartItem(user, id);
@@ -179,7 +181,7 @@ namespace Capstone.Controllers
         [ImportModelState]
         public IActionResult Login()
         {
-            if(_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
+            if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 return Redirect("/");
             }
@@ -189,19 +191,19 @@ namespace Capstone.Controllers
         [ExportModelState]
         public IActionResult LoginUser(LoginViewModel user)
         {
-            if(!_userRepository.ValidateUserLogin(user.Email, user.Password))
+            if (!_userRepository.ValidateUserLogin(user.Email, user.Password))
             {
                 ModelState.AddModelError("Email", "Email or Password is incorrect, try again");
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Redirect("/Login");
             }
 
             UserViewModel dbUser = _userRepository.GetUser(user.Email);
 
-            if(dbUser != null)
+            if (dbUser != null)
             {
                 _sessionService.SetItems(SessionKeys.User, dbUser.Email, HttpContext);
                 _sessionService.SetItems(SessionKeys.UserAccessStatus, SessionKeys.UserAccessStatusLoggedIn, HttpContext); ;
@@ -263,7 +265,7 @@ namespace Capstone.Controllers
                 else if (_userRepository.IsPhoneNumberExist(formattedPhoneNumber))
                 {
                     ModelState.AddModelError("Phone", "Phone number already exists");
-                    return Redirect("/Register"); 
+                    return Redirect("/Register");
                 }
                 phoneNumber = formattedPhoneNumber;
             }
@@ -271,6 +273,39 @@ namespace Capstone.Controllers
             _userRepository.Create(new UserViewModel() { Email = user.Email, Password = user.Password, Barangay = FunctionHelper.GetBarangayList()[int.Parse(user.Barangay)], StreetAddress = user.StreetAddress, Phone = phoneNumber, Profile = user.Profile });
             TempData["register-success"] = true;
             return RedirectToAction("Index");
+        }
+
+        public IActionResult ReturnProduct(int ProductId, int Quantity, int UserId, int OrderId)
+        {
+            if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
+            {
+                UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
+                var userOrders = _productRepository.GetUserOrders(user);
+                var order = userOrders.Orders.FirstOrDefault(m => m.Id == OrderId);
+                var productOrder = order.ProductOrders.FirstOrDefault(m => m.Id == ProductId);
+
+                return View("ReturnProduct", new ReturnedOrder()
+                {
+                    Name = productOrder.Name,
+                    Image = productOrder.Image,
+                    Details = "",
+                    Quantity = Quantity,
+                    UserId = UserId,
+                    OrderId = OrderId,
+                    ProductId = ProductId,
+                });
+            }
+            else
+            {
+                return Json(new { Success = false });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult ReturnOrder(ReturnedOrder ReturnOrder)
+        {
+            _productRepository.SaveReturnOrder(ReturnOrder);
+            return Redirect("/ViewOrders");
         }
     }
 }

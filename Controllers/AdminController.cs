@@ -9,6 +9,7 @@ using Capstone.Repository.IRepository;
 using Capstone.Utilities;
 using Capstone.ViewModels;
 using Capstone.ActionFilters;
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Capstone.Controllers
@@ -52,6 +53,7 @@ namespace Capstone.Controllers
         {
             return View("ManageOrder", _productRepository.GetAllUserOrders());
         }
+       
 
         public IActionResult ApproveOrder(string orderId)
         {
@@ -132,6 +134,7 @@ namespace Capstone.Controllers
             return Json(new { Success = true, Barangay = b.index, Role = r.index });
         }
 
+
         public IActionResult ManageInventory()
         {
             List<ManageInvetoryViewModel> ListOfProduct = new List<ManageInvetoryViewModel>();
@@ -146,6 +149,13 @@ namespace Capstone.Controllers
             return Json(new { Success = "Success"});
 
         }
-       
+        public IActionResult ReturnProducts()
+        {
+            List<ManageInvetoryViewModel> ListOfProduct = new List<ManageInvetoryViewModel>();
+            ListOfProduct = _productRepository.getInventory();
+            ViewBag.ListOfProduct = ListOfProduct;
+            return View();
+        }
+
     }
 }

@@ -9,6 +9,7 @@
     }
 </style>
 
+
 <div class="container">
     <br />
     <br />
@@ -56,6 +57,9 @@
                                             <th class="text-center">
                                                 Status
                                             </th>
+                                            <th class="text-center">
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -81,6 +85,12 @@
                                                 <td style="width: 16%;" class="align-middle text-center">
                                                     @i.Status
                                                 </td>
+                                                <td style="width: 16%;" class="align-middle text-center">
+                                                    <a href="Home/ReturnProduct?ProductId=@(i.Id)&Quantity=@(i.Quantity)&UserId=@(ViewBag.UserId)&OrderId=@(item.Id)" class="btn btn-link" type="button">
+                                                        Return
+                                                    </a>
+                                                </td>
+                                       
                                             </tr>
                                         }
                                     <tr>

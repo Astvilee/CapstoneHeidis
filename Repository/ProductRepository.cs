@@ -5,7 +5,6 @@ using Capstone.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Capstone.Repository
 {
@@ -119,7 +118,7 @@ namespace Capstone.Repository
             Order order = new Order() { DateCreated = DateTime.Now, User = dbUser };
             foreach (var item in listOfProducts)
             {
-                Product product = _context.Products.Where(m=>m.CartProducts.Contains(item)).FirstOrDefault();
+                Product product = _context.Products.Where(m => m.CartProducts.Contains(item)).FirstOrDefault();
                 ProductOrder productOrder = new ProductOrder();
                 productOrder.Order = order;
                 productOrder.Status = EnumsCollection.ProductOrderStatus.Pending.ToString();
@@ -143,7 +142,7 @@ namespace Capstone.Repository
         {
             User dbUser = _context.Users.Where(u => u.Email.Equals(user.Email)).FirstOrDefault();
             int count = 0;
-            if(dbUser != null)
+            if (dbUser != null)
             {
                 var listOfProducts = _context.CartProducts.Where(m => m.User == dbUser).ToList();
                 foreach (var item in listOfProducts)
@@ -226,22 +225,24 @@ namespace Capstone.Repository
                 order.Date = "DATE: " + item.DateCreated.ToShortDateString() + " TIME: " + item.DateCreated.ToShortTimeString();
                 order.ProductOrders = productOrderViewModels;
                 order.Total = total;
-                if(dbUser != null)
-                    order.Profile = new ProfileViewModel() { Address = $"{dbUser.StreetAddress} {dbUser.Barangay}", EmailAddress = dbUser.Email, PhoneNumber = dbUser.Phone} ;
+                if (dbUser != null)
+                    order.Profile = new ProfileViewModel() { Address = $"{dbUser.StreetAddress} {dbUser.Barangay}", EmailAddress = dbUser.Email, PhoneNumber = dbUser.Phone };
                 orderViewModels.Add(order);
             }
             orderViewModels.Reverse();
 
-            List<OrderViewModel> pendingOrders = orderViewModels.Where(x=>x.ProductOrders.Any(m=>m.Status.Equals("Pending"))).ToList();
-            List<OrderViewModel> shippedOrders = orderViewModels.Where(x=>!x.ProductOrders.Any(m=>m.Status.Equals("Pending")) && x.ProductOrders.Any(m=>m.Status.Equals("Shipped"))).ToList();
-            List<OrderViewModel> deliveredOrders = orderViewModels.Where(x=>!x.ProductOrders.Any(m=>m.Status.Equals("Pending")) && !x.ProductOrders.Any(m=>m.Status.Equals("Shipped")) && x.ProductOrders.Any(m=>m.Status.Equals("Delivered"))).ToList();
-            return new ManageOrderViewModel() { PendingOrders = pendingOrders, ShippedOrders = shippedOrders, DeliveredOrders = deliveredOrders};
+            List<OrderViewModel> pendingOrders = orderViewModels.Where(x => x.ProductOrders.Any(m => m.Status.Equals("Pending"))).ToList();
+            List<OrderViewModel> shippedOrders = orderViewModels.Where(x => !x.ProductOrders.Any(m => m.Status.Equals("Pending")) && x.ProductOrders.Any(m => m.Status.Equals("Shipped"))).ToList();
+            List<OrderViewModel> deliveredOrders = orderViewModels.Where(x => !x.ProductOrders.Any(m => m.Status.Equals("Pending")) && !x.ProductOrders.Any(m => m.Status.Equals("Shipped")) && x.ProductOrders.Any(m => m.Status.Equals("Delivered"))).ToList();
+            return new ManageOrderViewModel() { PendingOrders = pendingOrders, ShippedOrders = shippedOrders, DeliveredOrders = deliveredOrders };
         }
 
         public void ApproveOrder(string orderId)
         {
             Order order = _context.Orders.Where(x => x.Id.ToString().Equals(orderId)).FirstOrDefault();
-            if(order != null)
+            var userId = order.UserId;
+            var user = _context.Users.FirstOrDefault(m => m.Id == userId);
+            if (order != null)
             {
                 var ListOfProductOrders = _context.ProductOrders.Where(m => m.Order == order);
                 foreach (var item in ListOfProductOrders)
@@ -254,7 +255,7 @@ namespace Capstone.Repository
         public void ConfirmOrder(string orderId)
         {
             Order order = _context.Orders.Where(x => x.Id.ToString().Equals(orderId)).FirstOrDefault();
-            if(order != null)
+            if (order != null)
             {
                 var ListOfProductOrders = _context.ProductOrders.Where(m => m.Order == order);
                 foreach (var item in ListOfProductOrders)
@@ -266,14 +267,18 @@ namespace Capstone.Repository
         }
         public List<ManageInvetoryViewModel> getInventory()
         {
-            var ListOfProducts = _context.Products.Select(m => new ManageInvetoryViewModel()
+            var ListOfProducts = _context.Products.ToList();
+            List<ManageInvetoryViewModel> inventory = new List<ManageInvetoryViewModel>();
+            foreach (var item in ListOfProducts)
             {
-                Id = m.Id,
-                BaseName = m.BaseName,
-                Price = m.BasePrice.ToString(),
-                Stocks = m.Stocks
-            }).ToList();
-            return ListOfProducts;
+                inventory.Add(new ManageInvetoryViewModel()
+                {
+                    Id = item.Id,
+                    BaseName = item.BaseName,
+                    Price = item.BasePrice.ToString(),
+                });
+            }
+            return inventory;
         }
 
         public void UpdateInventory(ManageInvetoryViewModel Inv)
@@ -282,11 +287,27 @@ namespace Capstone.Repository
             var model = _context.Products.FirstOrDefault(m => m.Id == Inv.Id);
             _context.Entry(model).CurrentValues.SetValues(new Product()
             {
-                Id =Inv.Id,
-                BaseName=Inv.BaseName,
-                Stocks = Inv.Stocks,
+                Id = Inv.Id,
+                Category = model.Category,
+                BaseImage = model.BaseImage,
+                BaseName = Inv.BaseName,
                 BasePrice = double.Parse(Inv.Price),
+                Description = model.Description,
+                //PromoImage = model.PromoImage,
+                IsActive = model.IsActive,
+                ProductOrders = model.ProductOrders,
+                CartProducts = model.CartProducts,
+               
             });
+            _context.SaveChanges();
+        }
+
+        public void SaveReturnOrder(ReturnedOrder Order)
+        {
+            var orders = _context.Orders.FirstOrDefault(m => m.Id == Order.OrderId);
+            var productOrders = _context.ProductOrders.FirstOrDefault(m => m.OrderId == Order.OrderId && m.Id == Order.ProductId);
+            productOrders.Quantity = productOrders.Quantity - Order.Quantity;
+            _context.ReturnedOrders.Add(Order);
             _context.SaveChanges();
         }
     }

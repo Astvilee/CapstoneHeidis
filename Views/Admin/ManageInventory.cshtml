@@ -13,16 +13,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header"></div>
-                <h2 class="modal-title">Update Product</h2>
+                <h2 class="modal-title">Return Products</h2>
                 <div class="modal-body">
                     <form id="updateForm">
                         <input type="hidden" name="Id" id="id" />
                         <label>Product Name</label>
                         @Html.TextBoxFor(m => m.BaseName,new {@class="form-control",@id="BaseName"})
-                        <label>Price</label>
-                        @Html.TextBoxFor(m => m.Price,new {@class="form-control",@id="Price"})
-                        <label>Stocks</label>
-                        @Html.TextBoxFor(m => m.Stocks,new {@class="form-control",@id="Stocks"})
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -80,7 +76,6 @@
         $(function () {
             $(".EditButton").click(function () {
                 var elements = $(this).parent().parent().children();
-                console.log(elements);
                 $("#id").val(elements[0].value);
                 $("#BaseName").val(elements[1].innerText);
                 $("#Price").val(elements[2].innerText);
@@ -95,7 +90,6 @@
                     data: updateDate,
                     success:function(res){
                         console.log(res);
-
                         window.location.href="/Admin/ManageInventory";
                     },  
                      error: function (res) {
@@ -105,7 +99,6 @@
                     }
                 });
             });
-
         });
     </script>
 }

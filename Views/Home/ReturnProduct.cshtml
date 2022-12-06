@@ -1,0 +1,50 @@
+﻿@model Capstone.Data.ReturnedOrder
+@{
+    
+}
+<br />
+<br />
+<br />
+<br />
+
+<div class="container">
+    <form asp-controller="Home" asp-action="ReturnOrder" method="post">
+    <table class="table">
+        @Html.HiddenFor(m => m.ProductId)
+        @Html.HiddenFor(m => m.UserId)
+        @Html.HiddenFor(m => m.OrderId)
+        @Html.HiddenFor(m=>m.Image);
+        @Html.HiddenFor(m=>m.Name);
+        <tr>
+            <td style="text-align: center">
+                @Model.Name
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                <img src="@Url.Content(Model.Image)" class="rounded mx-auto d-block img-fluid" alt="..." width="300" height="400">
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                Purchased quantity : @Model.Quantity<br />
+                Number of product to return.
+                <input type="number" asp-for="Quantity" name="Quantity" max="@Model.Quantity" min="1">
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                Reason
+                <textarea asp-for="Details" rows="4" cols="50">
+                </textarea>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                <button type="submit" id="btnSave" class="btn btn-primary mr-2">Return</button>
+                <a href="/Home/ViewOrders" id="btnCancel" class="btn btn-danger">Cancel</a>
+            </td>
+        </tr>
+    </table>
+    </form>
+</div>

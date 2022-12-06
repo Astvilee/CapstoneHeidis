@@ -9,8 +9,13 @@ namespace Capstone.Data
     {
         public static void Initialize(AppDbContext context)
         {
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
+            if (context.Users.Where(m => m.Email.Equals("admin@admin.com")).ToList().Count() <= 0)
+            {
+                context.Users.Add(new User() { Email = "admin@admin.com", Password = "qwe123", Role = "Admin", Phone = "123456789" });
+                context.SaveChanges();
+            }
             if (context.Products.ToList().Count()<=0)
             {
                 Product slimGallon = new Product();
@@ -20,8 +25,8 @@ namespace Capstone.Data
                 slimGallon.BasePrice = 130.00;
                 slimGallon.Category = Utilities.ProductCategory.WithNoWater;
                 slimGallon.IsActive = true;
-                slimGallon.Stocks = 999;
                 context.Products.Add(slimGallon);
+
 
                 Product slimGallonWithWater = new Product();
                 slimGallonWithWater.BaseImage = new ProductBaseImage() { Path = "~/images/slim.jpg", Product = slimGallonWithWater };
@@ -113,10 +118,7 @@ namespace Capstone.Data
                 smallCap.IsActive = true;
                 context.Products.Add(smallCap);
             }
-            if (context.Users.Where(m=>m.Email.Equals("admin@admin.com")).ToList().Count()<=0)
-            {
-                context.Users.Add(new User() { Email = "admin@admin.com", Password = "qwe123", Role = "Admin", Phone = "123456789" });
-            }
+           
             context.SaveChanges();
         }
     }
