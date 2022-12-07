@@ -128,7 +128,7 @@ namespace Capstone.Controllers
             if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
-                return Json(new { Success = true, total = _productRepository.GetTotalCartItem(user) });
+                return Json(new { Success = true, total = _productRepository.GetTotalCartItem(user) });
             }
             else
             {
