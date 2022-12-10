@@ -1,0 +1,39 @@
+﻿@model Capstone.ViewModels.ReturnedOrderViewModel
+@using Capstone.ViewModels
+@{
+    ViewData["Title"] = "Inventory";
+    List<ReturnedOrderViewModel> ListOfReturn = ViewBag.ListOfReturn;
+}
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="text-center">
+        <table class="table"> 
+            <thead>
+                <tr>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Reason for return
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ListOfReturn){
+                    <tr>
+                        <td class="text-center">@item.Name</td>
+                        <td class="text-center">@item.Details</td>
+                        <td class="text-center">@item.Quantity</td>
+                    </tr>
+                }
+                
+            </tbody>
+        </table>
+    </div>
+</div>

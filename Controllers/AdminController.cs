@@ -11,6 +11,7 @@ using Capstone.ViewModels;
 using Capstone.ActionFilters;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Capstone.Data;
 
 namespace Capstone.Controllers
 {
@@ -149,11 +150,11 @@ namespace Capstone.Controllers
             return Json(new { Success = "Success"});
 
         }
-        public IActionResult ReturnProducts()
+        public IActionResult ReturnedProducts()
         {
-            List<ManageInvetoryViewModel> ListOfProduct = new List<ManageInvetoryViewModel>();
-            ListOfProduct = _productRepository.getInventory();
-            ViewBag.ListOfProduct = ListOfProduct;
+            List<ReturnedOrderViewModel> ListOfReturn = new List<ReturnedOrderViewModel>();
+            ListOfReturn = _productRepository.GetAllReturnedOrders();
+            ViewBag.ListOfReturn = ListOfReturn;
             return View();
         }
 

@@ -310,5 +310,23 @@ namespace Capstone.Repository
             _context.ReturnedOrders.Add(Order);
             _context.SaveChanges();
         }
+
+        public List<ReturnedOrderViewModel> GetAllReturnedOrders()
+        {
+            var ListOfReturn = _context.ReturnedOrders.ToList();
+           List<ReturnedOrderViewModel> returnedOrders = new List<ReturnedOrderViewModel>();
+            foreach( var item in ListOfReturn)
+            {
+                returnedOrders.Add(new ReturnedOrderViewModel()
+                {
+                    Name= item.Name,
+                    Details=item.Details,
+                    Quantity=item.Quantity
+                });
+            }
+            return returnedOrders;
+        }
+
+        
     }
 }

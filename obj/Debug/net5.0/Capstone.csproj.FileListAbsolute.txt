@@ -1184,7 +1184,6 @@ C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Vi
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\ManageInventory.cshtml.g.cs
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\ManageOrder.cshtml.g.cs
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\ManageSales.cshtml.g.cs
-C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\ReturnProducts.cshtml.g.cs
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\_UpdateProduct.cshtml.g.cs
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Home\About.cshtml.g.cs
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Home\Cart.cshtml.g.cs
@@ -1213,3 +1212,4 @@ C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\refint\C
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Capstone.pdb
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Capstone.genruntimeconfig.cache
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\ref\Capstone.dll
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\ReturnedProducts.cshtml.g.cs

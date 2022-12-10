@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Capstone.Data
 {
@@ -13,5 +15,6 @@ namespace Capstone.Data
         public int UserId { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
+
     }
 }
