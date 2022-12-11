@@ -258,6 +258,12 @@
       "jQuery/1.8.0": {
         "type": "package"
       },
+      "jQuery.Validation/1.19.5": {
+        "type": "package",
+        "dependencies": {
+          "jQuery": "1.4.4"
+        }
+      },
       "libphonenumber-csharp/8.12.49": {
         "type": "package",
         "dependencies": {
@@ -1307,6 +1313,13 @@
         "type": "package",
         "dependencies": {
           "jQuery": "1.8.0"
+        }
+      },
+      "Microsoft.jQuery.Unobtrusive.Validation/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "jQuery": "1.8.0",
+          "jQuery.Validation": "1.8.0.1"
         }
       },
       "Microsoft.Net.Http.Headers/2.2.0": {
@@ -2722,6 +2735,20 @@
         "jquery.nuspec"
       ]
     },
+    "jQuery.Validation/1.19.5": {
+      "sha512": "lBHoaszLpKYxiVCWwIoxdqSCrlqnW9jeVMinMQ0uNMFcl3rmY8XyeaerfGLRbkVRUzh/fM3APaKepEezrR5AcA==",
+      "type": "package",
+      "path": "jquery.validation/1.19.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/jquery.validate-vsdoc.js",
+        "Content/Scripts/jquery.validate.js",
+        "Content/Scripts/jquery.validate.min.js",
+        "jquery.validation.1.19.5.nupkg.sha512",
+        "jquery.validation.nuspec"
+      ]
+    },
     "libphonenumber-csharp/8.12.49": {
       "sha512": "iG9LdX9hzt8zbweHRtyVIzeEpJCEyOn7JQMVco/S1dL+jyb2CXKyAz2JT6VkrlGtVPvV3ZHqneuvN9m1JLTzwQ==",
       "type": "package",
@@ -3904,6 +3931,19 @@
         "Content/Scripts/jquery.unobtrusive-ajax.min.js",
         "microsoft.jquery.unobtrusive.ajax.3.2.6.nupkg.sha512",
         "microsoft.jquery.unobtrusive.ajax.nuspec"
+      ]
+    },
+    "Microsoft.jQuery.Unobtrusive.Validation/4.0.0": {
+      "sha512": "RJ1eBcFIwHINVocYtOlmBQd21jGgHOHGe7TLzmQ9VMRMUqAlJoxyCw1AayBkdExqrEZt0Wz9uaZiDX75NHQmSw==",
+      "type": "package",
+      "path": "microsoft.jquery.unobtrusive.validation/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/jquery.validate.unobtrusive.js",
+        "Content/Scripts/jquery.validate.unobtrusive.min.js",
+        "microsoft.jquery.unobtrusive.validation.4.0.0.nupkg.sha512",
+        "microsoft.jquery.unobtrusive.validation.nuspec"
       ]
     },
     "Microsoft.Net.Http.Headers/2.2.0": {
@@ -7444,8 +7484,10 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.17",
       "Microsoft.Extensions.DependencyInjection >= 6.0.0",
       "Microsoft.jQuery.Unobtrusive.Ajax >= 3.2.6",
+      "Microsoft.jQuery.Unobtrusive.Validation >= 4.0.0",
       "Newtonsoft.Json >= 13.0.1",
       "bootstrap >= 5.1.3",
+      "jQuery.Validation >= 1.19.5",
       "libphonenumber-csharp >= 8.12.49"
     ]
   },
@@ -7524,6 +7566,10 @@
             "target": "Package",
             "version": "[3.2.6, )"
           },
+          "Microsoft.jQuery.Unobtrusive.Validation": {
+            "target": "Package",
+            "version": "[4.0.0, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"
@@ -7531,6 +7577,10 @@
           "bootstrap": {
             "target": "Package",
             "version": "[5.1.3, )"
+          },
+          "jQuery.Validation": {
+            "target": "Package",
+            "version": "[1.19.5, )"
           },
           "libphonenumber-csharp": {
             "target": "Package",

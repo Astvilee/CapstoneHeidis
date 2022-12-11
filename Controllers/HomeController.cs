@@ -191,6 +191,7 @@ namespace Capstone.Controllers
         [ExportModelState]
         public IActionResult LoginUser(LoginViewModel user)
         {
+          
             if (!_userRepository.ValidateUserLogin(user.Email, user.Password))
             {
                 ModelState.AddModelError("Email", "Email or Password is incorrect, try again");

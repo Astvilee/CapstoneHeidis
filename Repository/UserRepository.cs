@@ -67,6 +67,10 @@ namespace Capstone.Repository
 
         public bool ValidateUserLogin(string email, string password)
         {
+            if (email == null || password == null)
+            {
+                return false;
+            }
             var dbUser = _context.Users.FirstOrDefault(u => u.Email.ToLower().Equals(email.ToLower()) && u.Password.Equals(password));
             return (dbUser != null) ? true : false;
         }

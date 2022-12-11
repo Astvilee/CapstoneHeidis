@@ -276,6 +276,7 @@ namespace Capstone.Repository
                     Id = item.Id,
                     BaseName = item.BaseName,
                     Price = item.BasePrice.ToString(),
+                    Stocks= item.Stocks,
                 });
             }
             return inventory;
@@ -283,7 +284,6 @@ namespace Capstone.Repository
 
         public void UpdateInventory(ManageInvetoryViewModel Inv)
         {
-
             var model = _context.Products.FirstOrDefault(m => m.Id == Inv.Id);
             _context.Entry(model).CurrentValues.SetValues(new Product()
             {
@@ -297,6 +297,7 @@ namespace Capstone.Repository
                 IsActive = model.IsActive,
                 ProductOrders = model.ProductOrders,
                 CartProducts = model.CartProducts,
+                Stocks= Inv.Stocks,
                
             });
             _context.SaveChanges();
@@ -321,7 +322,8 @@ namespace Capstone.Repository
                 {
                     Name= item.Name,
                     Details=item.Details,
-                    Quantity=item.Quantity
+                    Quantity=item.Quantity,
+                    UserId=item.UserId,
                 });
             }
             return returnedOrders;

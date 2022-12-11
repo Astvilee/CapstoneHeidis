@@ -15,6 +15,7 @@
         color: #ff0000;
     }
 </style>
+    
 <div class="container">
     <div class="login-form container-fluid p-5 mx-auto my-5 justify-content-center">
         @using (Html.BeginForm("LoginUser", "Home", FormMethod.Post))
@@ -26,12 +27,14 @@
                     <div class="row">
                         @Html.ValidationSummary(false, "", new { @class = "error-text" })
                     </div>
+
                     <div class="row form-group">
                         <div class="col-md-3">
                             @Html.LabelFor(m => m.Email)
                         </div>
-                        <div class="row col-md-9">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        <div class="row col-md-9">                            
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control",@data_val = "true", @data_val_required = "Email is required." })
+                            
                         </div>
                     </div>
 
@@ -39,8 +42,9 @@
                         <div class="col-md-3">
                             @Html.LabelFor(m => m.Password)
                         </div>
-                        <div class="row col-md-9">
-                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "password" })
+                        <div class="row col-md-9">                          
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "password",@data_val = "true", @data_val_required = "Password is required."})
+                            
                         </div>
                     </div>
 

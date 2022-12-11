@@ -19,6 +19,10 @@
                         <input type="hidden" name="Id" id="id" />
                         <label>Product Name</label>
                         @Html.TextBoxFor(m => m.BaseName,new {@class="form-control",@id="BaseName"})
+                         <label>Price</label>
+                        @Html.TextBoxFor(m => m.Price,new {@class="form-control",@id="Price"})
+                        <label>Stock</label>
+                        @Html.TextBoxFor(m => m.Stocks,new {@class="form-control",@id="Stocks"})
                     </form>
                 </div>
                 <div class="modal-footer">

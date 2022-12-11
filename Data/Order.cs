@@ -12,6 +12,7 @@ namespace Capstone.Data
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }
         public int UserId { get; set; }
+        
         public User User { get; set; }
         public ICollection<ProductOrder> ProductOrders { get; set; }
     }
