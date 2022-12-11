@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Capstone.Data;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using System;
 
 namespace Capstone.Controllers
 {
@@ -294,6 +295,7 @@ namespace Capstone.Controllers
                     UserId = UserId,
                     OrderId = OrderId,
                     ProductId = ProductId,
+                    CreatedDate = DateTime.Now
                 });
             }
             else

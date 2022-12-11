@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Capstone.ViewModels
 {
@@ -10,6 +12,7 @@ namespace Capstone.ViewModels
         public string Details { get; set; }
         public int Quantity { get; set; }
         public int UserId { get; set; }
+        public DateTime DateCreated { get; set; }
 
     }
 }

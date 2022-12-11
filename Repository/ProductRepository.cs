@@ -324,6 +324,7 @@ namespace Capstone.Repository
                     Details=item.Details,
                     Quantity=item.Quantity,
                     UserId=item.UserId,
+                    DateCreated= DateTime.Now,
                 });
             }
             return returnedOrders;
