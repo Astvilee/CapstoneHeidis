@@ -242,6 +242,12 @@ namespace Capstone.Repository
             Order order = _context.Orders.Where(x => x.Id.ToString().Equals(orderId)).FirstOrDefault();
             var userId = order.UserId;
             var user = _context.Users.FirstOrDefault(m => m.Id == userId);
+            var productorders = _context.ProductOrders.Where(x => x.OrderId.ToString().Equals(orderId)).ToList();
+            foreach (var item in productorders)
+            {
+                var product = _context.Products.FirstOrDefault(m => m.Id.ToString().Equals(item.ProductId.ToString()));
+                product.Stocks -= item.Quantity;
+            }
             if (order != null)
             {
                 var ListOfProductOrders = _context.ProductOrders.Where(m => m.Order == order);
@@ -276,7 +282,7 @@ namespace Capstone.Repository
                     Id = item.Id,
                     BaseName = item.BaseName,
                     Price = item.BasePrice.ToString(),
-                    Stocks= item.Stocks,
+                    Stocks = item.Stocks,
                 });
             }
             return inventory;
@@ -297,8 +303,8 @@ namespace Capstone.Repository
                 IsActive = model.IsActive,
                 ProductOrders = model.ProductOrders,
                 CartProducts = model.CartProducts,
-                Stocks= Inv.Stocks,
-               
+                Stocks = Inv.Stocks,
+
             });
             _context.SaveChanges();
         }
@@ -307,6 +313,8 @@ namespace Capstone.Repository
         {
             var orders = _context.Orders.FirstOrDefault(m => m.Id == Order.OrderId);
             var productOrders = _context.ProductOrders.FirstOrDefault(m => m.OrderId == Order.OrderId && m.Id == Order.ProductId);
+            //var product = _context.Products.FirstOrDefault(m => m.Id == productOrders.ProductId);
+            //product.Stocks += Order.Quantity;
             productOrders.Quantity = productOrders.Quantity - Order.Quantity;
             _context.ReturnedOrders.Add(Order);
             _context.SaveChanges();
@@ -315,21 +323,43 @@ namespace Capstone.Repository
         public List<ReturnedOrderViewModel> GetAllReturnedOrders()
         {
             var ListOfReturn = _context.ReturnedOrders.ToList();
-           List<ReturnedOrderViewModel> returnedOrders = new List<ReturnedOrderViewModel>();
-            foreach( var item in ListOfReturn)
+            var user = _context.Users.ToList();
+            List<ReturnedOrderViewModel> returnedOrders = new List<ReturnedOrderViewModel>();
+            foreach (var item in ListOfReturn)
             {
+                var userid = _context.Users.FirstOrDefault(m => m.Id == item.UserId);
+                var useremail = userid.Email;
                 returnedOrders.Add(new ReturnedOrderViewModel()
                 {
-                    Name= item.Name,
-                    Details=item.Details,
-                    Quantity=item.Quantity,
-                    UserId=item.UserId,
-                    DateCreated= DateTime.Now,
+                    Name = item.Name,
+                    Details = item.Details,
+                    Quantity = item.Quantity,
+                    UserId = item.UserId,
+                    DateCreated = DateTime.Now,
+                    Email = useremail
                 });
             }
             return returnedOrders;
         }
 
-        
+        public List<ProductListViewModel> GetAllProducts()
+        {
+            var products = _context.Products.ToList();
+            
+            var ListOfProducts = _context.Products.ToList();
+            List<ProductListViewModel> productslist = new List<ProductListViewModel>();
+            foreach (var item in ListOfProducts)
+            {
+               productslist.Add(new ProductListViewModel()
+                    {
+                        Id = item.Id,
+                        Name = item.BaseName,
+                        Stocks = item.Stocks
+                    });
+            }
+            return productslist;
+
+
+        }
     }
 }

@@ -155,7 +155,15 @@ namespace Capstone.Controllers
             List<ReturnedOrderViewModel> ListOfReturn = new List<ReturnedOrderViewModel>();
             ListOfReturn = _productRepository.GetAllReturnedOrders();
             ViewBag.ListOfReturn = ListOfReturn;
+            ViewBag.Users = _userRepository.GetAllUsers();
             return View();
+        }
+
+        public IActionResult Dashboard()
+        {
+            ViewBag.Users = _userRepository.GetAllUsers();
+            ViewBag.Products = _productRepository.GetAllProducts();
+            return View(_productRepository.GetAllUserOrders());  
         }
 
     }

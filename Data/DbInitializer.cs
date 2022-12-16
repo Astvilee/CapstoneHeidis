@@ -43,7 +43,7 @@ namespace Capstone.Data
                 waterSlimGallon.BaseImage = new ProductBaseImage() { Path = "~/images/slim.jpg", Product = waterSlimGallon };
                 waterSlimGallon.BaseName = $"Refill for Slim Gallon";
                 waterSlimGallon.Description = "Slim Gallon is the standard sized container good for everyone. This is water refill for slim gallon.";
-                waterSlimGallon.BasePrice = 25.00;
+                waterSlimGallon.BasePrice = 20.00;
                 waterSlimGallon.Category = Utilities.ProductCategory.WithWater;
                 waterSlimGallon.IsActive = true;
                 waterSlimGallon.Stocks = 50;
@@ -73,7 +73,7 @@ namespace Capstone.Data
                 waterRoundGallon.BaseImage = new ProductBaseImage() { Path = "~/images/round.jpg", Product = waterRoundGallon };
                 waterRoundGallon.BaseName = $"Refill for Round Gallon";
                 waterRoundGallon.Description = "Round Gallon is the standard sized container good for everyone. This is water refill for round gallon.";
-                waterRoundGallon.BasePrice = 25.00;
+                waterRoundGallon.BasePrice = 20.00;
                 waterRoundGallon.Category = Utilities.ProductCategory.WithWater;
                 waterRoundGallon.IsActive = true;
                 waterRoundGallon.Stocks = 50;

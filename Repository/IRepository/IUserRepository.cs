@@ -18,5 +18,6 @@ namespace Capstone.Repository.IRepository
         CartViewModel GetCartViewModel(string email);
         List<UserViewModel> GetAllUsers();
         bool RemoveUser(string id);
+        
     }
 }

@@ -1,0 +1,48 @@
+﻿@model Capstone.ViewModels.ManageOrderViewModel
+@using Capstone.ViewModels
+@{
+
+    List<UserViewModel> Users = ViewBag.Users;
+    List<ProductListViewModel> ProductList = ViewBag.Products;
+}
+<style>
+    h1,h3 {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+    p{
+        font-size : 30px;
+    }
+</style>
+<br />
+<br />
+<br />
+<br />
+@{
+    var totalorders = @Model.PendingOrders.Count() + @Model.ShippedOrders.Count() + @Model.DeliveredOrders.Count();
+}
+<h1>ADMIN DASHBOARD</h1>
+<div class="container">
+    <div class="orders">
+        <h3>Orders</h3>
+        <p>Total Orders : @totalorders</p>
+        <p>Pending Orders : @Model.PendingOrders.Count()</p>
+        <p>Shipped Orders : @Model.ShippedOrders.Count()</p>
+        <p>Delivered Orders: @Model.DeliveredOrders.Count()</p>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div>
+        <h3>Customers</h3>
+        <p>Total registered user : @Users.Count()</p>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div>
+        <h3>Inventory</h3>
+        <p>Lowest stock in inventory:</p>
+    </div>
+    
+</div>

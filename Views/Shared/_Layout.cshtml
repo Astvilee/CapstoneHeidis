@@ -136,7 +136,7 @@
                             <a class="nav-link text-dark" href="/About">ABOUT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Store">STORE</a>
+                            <a class="nav-link text-dark" href="/Store">PRODUCT CATALOG</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/Cart">
@@ -159,7 +159,10 @@
                             @if (role.Equals(SessionKeys.UserAccessRoleAdmin))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" href="/Admin">DASHBOARD</a>
+                                    <a class="nav-link text-dark" href="/Admin">MANAGEMENT MENU</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="/Admin/Dashboard">DASHBOARD</a>
                                 </li>
                             }
                             <li class="nav-item">

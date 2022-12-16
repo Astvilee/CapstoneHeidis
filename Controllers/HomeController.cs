@@ -213,7 +213,7 @@ namespace Capstone.Controllers
             }
 
             TempData["login-success"] = true;
-            return RedirectToAction("Index");
+            return RedirectToAction("Store");
         }
 
         public IActionResult Logout()
@@ -285,7 +285,6 @@ namespace Capstone.Controllers
                 var userOrders = _productRepository.GetUserOrders(user);
                 var order = userOrders.Orders.FirstOrDefault(m => m.Id == OrderId);
                 var productOrder = order.ProductOrders.FirstOrDefault(m => m.Id == ProductId);
-
                 return View("ReturnProduct", new ReturnedOrder()
                 {
                     Name = productOrder.Name,
@@ -310,5 +309,6 @@ namespace Capstone.Controllers
             _productRepository.SaveReturnOrder(ReturnOrder);
             return Redirect("/ViewOrders");
         }
+        
     }
 }
