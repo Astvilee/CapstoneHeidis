@@ -78,6 +78,7 @@ namespace Capstone.Repository
                 //{
                 model.Name = item.BaseName;
                 model.Price = item.BasePrice;
+                model.Stock = item.Stocks;
                 //}
                 products.Add(model);
             }

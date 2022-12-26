@@ -12,6 +12,7 @@ using Capstone.ActionFilters;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Capstone.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace Capstone.Controllers
 {
@@ -164,6 +165,11 @@ namespace Capstone.Controllers
             ViewBag.Users = _userRepository.GetAllUsers();
             ViewBag.Products = _productRepository.GetAllProducts();
             return View(_productRepository.GetAllUserOrders());  
+        }
+        public IActionResult EditProfile()
+        {
+           
+            return View();
         }
 
     }

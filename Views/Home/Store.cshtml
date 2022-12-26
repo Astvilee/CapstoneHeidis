@@ -17,6 +17,9 @@
     .product-description {
         height: 120px;
     }
+    .item-stock {
+        font-size:18px;
+    }
 </style>
 
 
@@ -53,10 +56,23 @@
                             <p>@item.Description</p>
                         </span>
                     </div>
+                    <div class="product-stock">
+                        <span>
+                            <p class="item-stock">Available stocks : @item.Stock </p>
+                        </span>
+                    </div>
                     <p><strong>PHP @item.Price.ToString("0.00")</strong></p>
                     <div>
-                        <input type="hidden" name="id" value="@item.Id" />
-                        <button class="addtocart btn btn-info container-fluid" type="submit">ADD TO CART</button>
+                        @if (item.Stock >0 )
+                        {
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button class="addtocart btn btn-info container-fluid" type="submit">ADD TO CART</button>
+                        }
+                        else{
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button class="addtocart btn btn-info container-fluid" type="submit" disabled >ADD TO CART</button>
+                        }
+                        
                     </div>
                 </div>
             </div>

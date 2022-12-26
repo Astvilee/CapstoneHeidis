@@ -5,7 +5,7 @@ using Capstone.ViewModels;
 using Capstone.Repository.IRepository;
 using Capstone.Utilities;
 using System.Collections.Generic;
-
+using System.Web;
 namespace Capstone.Repository
 {
     public class UserRepository : IUserRepository
@@ -161,7 +161,10 @@ namespace Capstone.Repository
             _context.SaveChanges();
         }
 
-
+        public void UpdateUserInfo()
+        {
+            var user = _context.Users.FirstOrDefault(x=> x.Email == System.Web.HttpContext.Current.UJser.Identity.Name).ID;
+        }
        
 
         }

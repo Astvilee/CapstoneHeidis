@@ -9,7 +9,7 @@ namespace Capstone.Data
     {
         public static void Initialize(AppDbContext context)
         {
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             if (context.Users.Where(m => m.Email.Equals("admin@admin.com")).ToList().Count() <= 0)
             {
