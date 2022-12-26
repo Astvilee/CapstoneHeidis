@@ -64,7 +64,8 @@ namespace Capstone.Controllers
             if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
-                return View("Profile", new ProfileViewModel() { EmailAddress = user.Email, PhoneNumber = user.Phone, Address = $"{user.StreetAddress} {user.Barangay}" });
+                return View("Profile", new ProfileViewModel() { EmailAddress = user.Email,Password = user.Password,UserId=user.Id, Role=user.Role,
+                    PhoneNumber = user.Phone,StreetAddress=user.StreetAddress,Barangay=user.Barangay,Address = $"{user.StreetAddress}{user.Barangay}"});
             }
             else
             {
@@ -309,6 +310,11 @@ namespace Capstone.Controllers
             _productRepository.SaveReturnOrder(ReturnOrder);
             return Redirect("/ViewOrders");
         }
-        
+        public IActionResult UpdateInfo(ProfileViewModel profile)
+        {
+            _userRepository.UpdateInfo(profile);
+            return Json(new { Success = "Success" });
+        }
+
     }
 }

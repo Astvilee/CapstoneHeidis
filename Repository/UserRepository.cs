@@ -161,12 +161,23 @@ namespace Capstone.Repository
             _context.SaveChanges();
         }
 
-        public void UpdateUserInfo()
+        public void UpdateInfo(ProfileViewModel profile)
         {
-            var user = _context.Users.FirstOrDefault(x=> x.Email == System.Web.HttpContext.Current.UJser.Identity.Name).ID;
+            var model = _context.Users.FirstOrDefault(m => m.Id == profile.UserId);
+            _context.Entry(model).CurrentValues.SetValues(new User()
+            {
+                Id = profile.UserId,
+                Email= profile.EmailAddress,
+                Phone = profile.PhoneNumber,
+                Password = profile.Password,
+                StreetAddress = profile.StreetAddress,
+                Barangay = profile.Barangay,
+                Role=profile.Role,
+                Profile=model.Profile,
+            });
+            _context.SaveChanges();
         }
-       
 
-        }
+    }
     }
 

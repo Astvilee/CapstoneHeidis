@@ -7,10 +7,64 @@
 <br/>
 <br/>
 <br/>
+<div class="modal fade" id="UpdateProfile">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <h2 class="modal-title">Update Profile</h2>
+            <div class="modal-body">
+                <form id="updateForm">
+                    @Html.HiddenFor(m=>m.UserId)
+                    @Html.HiddenFor(m=>m.Role)
+                    <label>Email address: </label>
+                    @Html.TextBoxFor(m => m.EmailAddress,new {@class="form-control",@id="Email"})
+                    <label>Phone</label>
+                    @Html.TextBoxFor(m => m.PhoneNumber,new {@class="form-control",@id="Phone"})
+                    <label>Password</label>
+                    @Html.TextBoxFor(m => m.Password,new {@class="form-control",@id="Password",type="password"})
+                    <label>Street Address</label>
+                    @Html.TextBoxFor(m => m.StreetAddress,new {@class="form-control",@id="StreetAddress"})
+                    <label>Barangay</label>
+                    @Html.TextBoxFor(m => m.Barangay,new {@class="form-control",@id="Barangay"})
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <a href="#" id="btnSave" class="btn btn-primary mr-2">Update</a>
+                    <a href="#" id="btnCancel" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <h1>My Profile</h1>
     <p>Email Address: @Model.EmailAddress</p>
     <p>Phone Number: @Model.PhoneNumber.</p>
-    <p>Address: @Model.Address</p>
+    <p>Address: @Model.StreetAddress  @Model.Barangay</p>
+    <button class="btn-primary UpdateButton" data-toggle="modal" data-target="#UpdateProfile">Edit profile.</button>
 </div>
+@section Scripts{
+    <script>
+        $(function () {
+          $("#btnSave").click(function () {
+               var updateDate = $("#updateForm").serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/UpdateInfo",
+                    data: updateDate,
+                    success: function (res) {
+                        console.log(res);
+                        window.location.href = "/Home/Logout";
+                    },
+                    error: function (res) {
+                        console.log(res);
+
+                        window.location.href = "/Home/Logout";
+                    }
+                });
+            });
+        });
+    </script>
+}
