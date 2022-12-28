@@ -164,12 +164,15 @@ namespace Capstone.Repository
         public void UpdateInfo(ProfileViewModel profile)
         {
             var model = _context.Users.FirstOrDefault(m => m.Id == profile.UserId);
+            byte[] EncDataByte = new byte[profile.Password.Length];
+            EncDataByte = System.Text.Encoding.UTF8.GetBytes(profile.Password);
+            string EncryptedPassword = Convert.ToBase64String(EncDataByte);
             _context.Entry(model).CurrentValues.SetValues(new User()
             {
                 Id = profile.UserId,
                 Email= profile.EmailAddress,
                 Phone = profile.PhoneNumber,
-                Password = profile.Password,
+                Password = EncryptedPassword,
                 StreetAddress = profile.StreetAddress,
                 Barangay = profile.Barangay,
                 Role=profile.Role,
@@ -177,7 +180,41 @@ namespace Capstone.Repository
             });
             _context.SaveChanges();
         }
+        public string EncryptPassword(string password)
+        {
+            try
+            {
+                byte[] EncDataByte = new byte[password.Length];
+                EncDataByte = System.Text.Encoding.UTF8.GetBytes(password);
+                string EncryptedPassword = Convert.ToBase64String(EncDataByte);
+                return EncryptedPassword;
+            }
+            catch (Exception ex)
+            {
 
+                throw new Exception("Error in code: " + ex.Message);
+            }
+            
+        }
+        public string DecryptPassword(string password)
+        {
+            try
+            {
+                System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
+                System.Text.Decoder UTF8Decode = encoder.GetDecoder();
+                byte[] DecodeByte = Convert.FromBase64String(password);
+                int CharCount = UTF8Decode.GetCharCount(DecodeByte,0,DecodeByte.Length);
+                char[] DecodeChar = new char[CharCount];
+                UTF8Decode.GetChars(DecodeByte, 0, DecodeByte.Length, DecodeChar, 0);
+                string DecryptedPassword = new string(DecodeChar);
+                return DecryptedPassword;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error in code: " + ex.Message);
+            }
+        }
     }
     }
 

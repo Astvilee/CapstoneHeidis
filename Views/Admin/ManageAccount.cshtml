@@ -43,6 +43,8 @@
                         <div class="row col-md-9">
                             @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "password" })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error-text" })
+                            @*@Html.EditorFor(m=> m.Password,new {@class= "form-control"})
+                            <input type="checkbox" id="showPass" />*@
                         </div>
                     </div>
 
@@ -175,7 +177,18 @@
             });
             $(toastStart).toast('show');
         }
+        //$(function () {
 
+        //    $("#showPass").change(function () {
+        //        var checked = $(this).is(":checked");
+        //        if (checked) {
+        //            $("#password").attr("type", "text");
+        //        } else {
+        //            $("#password").attr("type", "password");
+        //        }
+        //    });
+
+        //});
         $(function () {
             $('.edit-user').on('click', function () {
                 let id = $(this).parent().find('.user-id').val();

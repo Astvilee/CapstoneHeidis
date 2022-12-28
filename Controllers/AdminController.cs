@@ -121,7 +121,7 @@ namespace Capstone.Controllers
                 }
                 phoneNumber = formattedPhoneNumber;
             }
-            _userRepository.CreateOrUpdate(new UserViewModel() { Id = user.Id, Email = user.Email, Password = user.Password, Role =  FunctionHelper.GetRoleList()[int.Parse(user.Role)], Barangay = FunctionHelper.GetBarangayList()[int.Parse(user.Barangay)], StreetAddress = user.StreetAddress, Phone = phoneNumber, Profile = user.Profile });
+            _userRepository.CreateOrUpdate(new UserViewModel() { Id = user.Id, Email = user.Email, Password = _userRepository.EncryptPassword(user.Password), Role =  FunctionHelper.GetRoleList()[int.Parse(user.Role)], Barangay = FunctionHelper.GetBarangayList()[int.Parse(user.Barangay)], StreetAddress = user.StreetAddress, Phone = phoneNumber, Profile = user.Profile });
             return Redirect("/Admin/ManageAccount");
         }
         

@@ -19,7 +19,7 @@ namespace Capstone.Repository.IRepository
         List<UserViewModel> GetAllUsers();
         bool RemoveUser(string id);
         public void UpdateInfo(ProfileViewModel profile);
-
-
+        public string EncryptPassword(string password);
+        public string DecryptPassword(string password);
     }
 }

@@ -9,11 +9,16 @@ namespace Capstone.Data
     {
         public static void Initialize(AppDbContext context)
         {
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
+            string adminpass = "qwe123";
+            byte[] EncDataByte = new byte[adminpass.Length];
+            EncDataByte = System.Text.Encoding.UTF8.GetBytes(adminpass);
+            string EncryptedPassword = Convert.ToBase64String(EncDataByte);
+            
             if (context.Users.Where(m => m.Email.Equals("admin@admin.com")).ToList().Count() <= 0)
             {
-                context.Users.Add(new User() { Email = "admin@admin.com", Password = "qwe123", Role = "Admin", Phone = "123456789" });
+                context.Users.Add(new User() { Email = "admin@admin.com", Password = EncryptedPassword, Role = "Admin", Phone = "123456789" });
                 context.SaveChanges();
             }
             if (context.Products.ToList().Count()<=0)

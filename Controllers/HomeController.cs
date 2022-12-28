@@ -64,7 +64,8 @@ namespace Capstone.Controllers
             if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
                 UserViewModel user = _userRepository.GetUser(_sessionService.GetItems(SessionKeys.User, HttpContext));
-                return View("Profile", new ProfileViewModel() { EmailAddress = user.Email,Password = user.Password,UserId=user.Id, Role=user.Role,
+                return View("Profile", new ProfileViewModel() { EmailAddress = user.Email,Password = _userRepository.DecryptPassword(user.Password),
+                    UserId=user.Id, Role=user.Role,
                     PhoneNumber = user.Phone,StreetAddress=user.StreetAddress,Barangay=user.Barangay,Address = $"{user.StreetAddress}{user.Barangay}"});
             }
             else
@@ -194,7 +195,7 @@ namespace Capstone.Controllers
         public IActionResult LoginUser(LoginViewModel user)
         {
           
-            if (!_userRepository.ValidateUserLogin(user.Email, user.Password))
+            if (!_userRepository.ValidateUserLogin(user.Email, _userRepository.EncryptPassword(user.Password)))
             {
                 ModelState.AddModelError("Email", "Email or Password is incorrect, try again");
             }
@@ -272,8 +273,8 @@ namespace Capstone.Controllers
                 }
                 phoneNumber = formattedPhoneNumber;
             }
-
-            _userRepository.Create(new UserViewModel() { Email = user.Email, Password = user.Password, Barangay = FunctionHelper.GetBarangayList()[int.Parse(user.Barangay)], StreetAddress = user.StreetAddress, Phone = phoneNumber, Profile = user.Profile });
+            var encryptpass = _userRepository.EncryptPassword(user.Password.ToString());
+            _userRepository.Create(new UserViewModel() { Email = user.Email, Password = encryptpass, Barangay = FunctionHelper.GetBarangayList()[int.Parse(user.Barangay)], StreetAddress = user.StreetAddress, Phone = phoneNumber, Profile = user.Profile });
             TempData["register-success"] = true;
             return RedirectToAction("Index");
         }
