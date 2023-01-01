@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Capstone.Data;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace Capstone.Controllers
 {
@@ -287,6 +288,7 @@ namespace Capstone.Controllers
                 var userOrders = _productRepository.GetUserOrders(user);
                 var order = userOrders.Orders.FirstOrDefault(m => m.Id == OrderId);
                 var productOrder = order.ProductOrders.FirstOrDefault(m => m.Id == ProductId);
+                var datetime = DateTime.Now;
                 return View("ReturnProduct", new ReturnedOrder()
                 {
                     Name = productOrder.Name,
@@ -296,8 +298,8 @@ namespace Capstone.Controllers
                     UserId = UserId,
                     OrderId = OrderId,
                     ProductId = ProductId,
-                    CreatedDate = DateTime.Now
-                });
+                    DateCreated = datetime,
+                 });
             }
             else
             {

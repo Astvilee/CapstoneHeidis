@@ -9,7 +9,7 @@ namespace Capstone.Data
     {
         public static void Initialize(AppDbContext context)
         {
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             string adminpass = "qwe123";
             byte[] EncDataByte = new byte[adminpass.Length];

@@ -1,6 +1,6 @@
 ﻿@model Capstone.Data.ReturnedOrder
 @{
-    
+
 }
 <br />
 <br />
@@ -8,14 +8,13 @@
 <br />
 
 <div class="container">
-    <form asp-controller="Home" asp-action="ReturnOrder" method="post">
+   <form asp-controller="Home" asp-action="ReturnOrder" method="post">
     <table class="table">
         @Html.HiddenFor(m => m.ProductId)
         @Html.HiddenFor(m => m.UserId)
         @Html.HiddenFor(m => m.OrderId)
         @Html.HiddenFor(m=>m.Image);
         @Html.HiddenFor(m=>m.Name);
-        
         <tr>
             <td style="text-align: center">
                 @Model.Name
@@ -39,6 +38,7 @@
                 <textarea asp-for="Details" rows="4" cols="50">
                 </textarea>
             </td>
+               <input type="hidden" asp-for="DateCreated" value=@DateTime.Now />
         </tr>
         <tr>
             <td style="text-align: center">

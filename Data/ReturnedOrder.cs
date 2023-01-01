@@ -15,7 +15,7 @@ namespace Capstone.Data
         public int UserId { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
-        public DateTime CreatedDate { get; set; }   
+        public DateTime DateCreated { get; set; }
 
     }
 }

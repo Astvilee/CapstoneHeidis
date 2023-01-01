@@ -2,6 +2,7 @@
 using Capstone.Repository.IRepository;
 using Capstone.Utilities;
 using Capstone.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -327,6 +328,7 @@ namespace Capstone.Repository
             var ListOfReturn = _context.ReturnedOrders.ToList();
             var user = _context.Users.ToList();
             List<ReturnedOrderViewModel> returnedOrders = new List<ReturnedOrderViewModel>();
+            var datetime = DateTime.Now;
             foreach (var item in ListOfReturn)
             {
                 var userid = _context.Users.FirstOrDefault(m => m.Id == item.UserId);
@@ -337,7 +339,7 @@ namespace Capstone.Repository
                     Details = item.Details,
                     Quantity = item.Quantity,
                     UserId = item.UserId,
-                    DateCreated = DateTime.Now,
+                    DateCreated = item.DateCreated,
                     Email = useremail
                 });
             }
