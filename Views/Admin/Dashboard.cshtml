@@ -3,7 +3,8 @@
 @{
 
     List<UserViewModel> Users = ViewBag.Users;
-    List<ProductListViewModel> ProductList = ViewBag.Products;
+    List<ManageInvetoryViewModel> ProductList = ViewBag.Products;
+    
 }
 <style>
     h1,h3 {
@@ -20,6 +21,10 @@
 <br />
 @{
     var totalorders = @Model.PendingOrders.Count() + @Model.ShippedOrders.Count() + @Model.DeliveredOrders.Count();
+    var loweststock = ProductList[0];
+    var loweststockname = loweststock.BaseName;
+    var loweststockcount = loweststock.Stocks;
+
 }
 <h1>ADMIN DASHBOARD</h1>
 <div class="container">
@@ -42,7 +47,9 @@
     <br />
     <div>
         <h3>Inventory</h3>
-        <p>Lowest stock in inventory:</p>
+        <p>Lowest stock in inventory:  </p>
+        <p>Item name : @loweststockname</p>
+        <p>Stocks left: @loweststockcount</p>
     </div>
     
 </div>

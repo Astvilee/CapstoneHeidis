@@ -344,24 +344,23 @@ namespace Capstone.Repository
             return returnedOrders;
         }
 
-        public List<ProductListViewModel> GetAllProducts()
+        public List<ManageInvetoryViewModel> GetAllProducts()
         {
-            var products = _context.Products.ToList();
-            
-            var ListOfProducts = _context.Products.ToList();
-            List<ProductListViewModel> productslist = new List<ProductListViewModel>();
+             var ListOfProducts = _context.Products.ToList();
+            List<ManageInvetoryViewModel> productslist = new List<ManageInvetoryViewModel>();
             foreach (var item in ListOfProducts)
             {
-               productslist.Add(new ProductListViewModel()
+               productslist.Add(new ManageInvetoryViewModel()
                     {
                         Id = item.Id,
-                        Name = item.BaseName,
+                        BaseName = item.BaseName,
                         Stocks = item.Stocks
                     });
             }
-            return productslist;
+            return productslist.OrderBy(p=> p.Stocks).ToList();
 
 
         }
+        
     }
 }

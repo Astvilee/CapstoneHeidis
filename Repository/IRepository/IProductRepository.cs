@@ -24,7 +24,7 @@ namespace Capstone.Repository.IRepository
         void UpdateInventory(ManageInvetoryViewModel inv);
         void SaveReturnOrder(ReturnedOrder order);
         List<ReturnedOrderViewModel> GetAllReturnedOrders();
-        List<ProductListViewModel> GetAllProducts();
-
+        List<ManageInvetoryViewModel> GetAllProducts();
+   
     }
 }
