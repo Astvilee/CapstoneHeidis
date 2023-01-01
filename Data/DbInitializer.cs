@@ -15,7 +15,6 @@ namespace Capstone.Data
             byte[] EncDataByte = new byte[adminpass.Length];
             EncDataByte = System.Text.Encoding.UTF8.GetBytes(adminpass);
             string EncryptedPassword = Convert.ToBase64String(EncDataByte);
-            
             if (context.Users.Where(m => m.Email.Equals("admin@admin.com")).ToList().Count() <= 0)
             {
                 context.Users.Add(new User() { Email = "admin@admin.com", Password = EncryptedPassword, Role = "Admin", Phone = "123456789" });
@@ -31,6 +30,7 @@ namespace Capstone.Data
                 slimGallon.Category = Utilities.ProductCategory.WithNoWater;
                 slimGallon.IsActive = true;
                 slimGallon.Stocks = 50;
+                slimGallon.Cost = 100;
                 context.Products.Add(slimGallon);
 
 
@@ -42,6 +42,7 @@ namespace Capstone.Data
                 slimGallonWithWater.Category = Utilities.ProductCategory.WithWater;
                 slimGallonWithWater.IsActive = true;
                 slimGallonWithWater.Stocks = 50;
+                slimGallonWithWater.Cost = 130;
                 context.Products.Add(slimGallonWithWater);
 
                 Product waterSlimGallon = new Product();
@@ -52,6 +53,7 @@ namespace Capstone.Data
                 waterSlimGallon.Category = Utilities.ProductCategory.WithWater;
                 waterSlimGallon.IsActive = true;
                 waterSlimGallon.Stocks = 50;
+                waterSlimGallon.Cost = 10;
                 context.Products.Add(waterSlimGallon);
 
                 Product roundGallon = new Product();
@@ -62,6 +64,7 @@ namespace Capstone.Data
                 roundGallon.Category = Utilities.ProductCategory.WithNoWater;
                 roundGallon.IsActive = true;
                 roundGallon.Stocks = 50;
+                roundGallon.Cost = 80;
                 context.Products.Add(roundGallon);
 
                 Product roundGallonWithWater = new Product();
@@ -72,6 +75,7 @@ namespace Capstone.Data
                 roundGallonWithWater.Category = Utilities.ProductCategory.WithWater;
                 roundGallonWithWater.IsActive = true;
                 roundGallonWithWater.Stocks = 50;
+                roundGallonWithWater.Cost = 100;
                 context.Products.Add(roundGallonWithWater);
 
                 Product waterRoundGallon = new Product();
@@ -82,6 +86,7 @@ namespace Capstone.Data
                 waterRoundGallon.Category = Utilities.ProductCategory.WithWater;
                 waterRoundGallon.IsActive = true;
                 waterRoundGallon.Stocks = 50;
+                waterRoundGallon.Cost = 10;
                 context.Products.Add(waterRoundGallon);
 
                 Product waterBottle350ml = new Product();
@@ -92,6 +97,7 @@ namespace Capstone.Data
                 waterBottle350ml.Category = Utilities.ProductCategory.Small;
                 waterBottle350ml.IsActive = true;
                 waterBottle350ml.Stocks = 50;
+                waterBottle350ml.Cost = 2.5;
                 context.Products.Add(waterBottle350ml);
 
                 Product waterBottle500ml = new Product();
@@ -102,6 +108,7 @@ namespace Capstone.Data
                 waterBottle500ml.Category = Utilities.ProductCategory.Medium;
                 waterBottle500ml.IsActive = true;
                 waterBottle500ml.Stocks = 50;
+                waterBottle500ml.Cost = 3;
                 context.Products.Add(waterBottle500ml);
 
                 Product waterBottle1L = new Product();
@@ -112,6 +119,7 @@ namespace Capstone.Data
                 waterBottle1L.Category = Utilities.ProductCategory.Large;
                 waterBottle1L.IsActive = true;
                 waterBottle1L.Stocks = 50;
+                waterBottle1L.Cost = 5;
                 context.Products.Add(waterBottle1L);
 
                 Product bigCap = new Product();
@@ -122,6 +130,7 @@ namespace Capstone.Data
                 bigCap.Category = Utilities.ProductCategory.Large;
                 bigCap.IsActive = true;
                 bigCap.Stocks = 50;
+                bigCap.Cost = 5;
                 context.Products.Add(bigCap);
 
                 Product smallCap = new Product();
@@ -132,6 +141,7 @@ namespace Capstone.Data
                 smallCap.Category = Utilities.ProductCategory.Small;
                 smallCap.IsActive = true;
                 smallCap.Stocks = 50;
+                smallCap.Cost = 2.5;
                 context.Products.Add(smallCap);
             }
            

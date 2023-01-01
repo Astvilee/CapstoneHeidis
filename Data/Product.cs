@@ -11,6 +11,7 @@ namespace Capstone.Data
         public int Id { get; set; }
         public string BaseName { get; set; }
         public double BasePrice { get; set; }
+        public double Cost { get; set; }
         public string Description { get; set; }
         public int Stocks { get; set; }
         public bool IsActive { get; set; }
