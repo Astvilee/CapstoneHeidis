@@ -1,0 +1,131 @@
+﻿@inject Capstone.Services.IServices.ISessionService _sessionService
+@using Capstone.Utilities;
+
+@{
+    var userAccessStatus = _sessionService.GetItems(SessionKeys.UserAccessStatus, ViewContext.HttpContext) ?? SessionKeys.UserAccessStatusLoggedOut;
+    string user = _sessionService.GetItems(SessionKeys.User, ViewContext.HttpContext) ?? "None";
+    string role = _sessionService.GetItems(SessionKeys.UserAccessRole, ViewContext.HttpContext) ?? "Default";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <style>
+        .badge {
+            padding-left: 9px;
+            padding-right: 9px;
+            -webkit-border-radius: 9px;
+            -moz-border-radius: 9px;
+            border-radius: 9px;
+            text-align: center;
+            align-content: center;
+        }
+
+        .label-warning[href],
+        .badge-warning[href] {
+            background-color: #c67605;
+        }
+
+        .quantity {
+            border: 0;
+        }
+
+        .btn-dark {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            padding: 0;
+            changed font-size: 12px;
+            line-height: 1.428571429;
+            border-radius: 15px;
+        }
+
+        #lblCartCount {
+            font-size: 12px;
+            background: #ff0000;
+            color: #fff;
+            padding: 0 5px;
+            vertical-align: top;
+            margin-left: -10px;
+        }
+
+        body, body * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .total_cart_items {
+            background-color: coral;
+            font-weight: bold;
+            border-radius: 40px;
+            font-size: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .success-button {
+            border: none;
+            background: none;
+        }
+
+        .toast-container, .toast {
+            z-index: 9998;
+            font-size: large;
+            opacity: 1 !important;
+        }
+
+        .toast-message {
+            font-weight: bold;
+        }
+    </style>
+</head>
+    @if (ViewBag.RegisterSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show text-center" id="success-alert">
+            <strong>Success!</strong> Your account has been registered successfully!
+            <button type="button" class="btn-close success-button close" data-dismiss="alert">
+                <i class="fa fa-window-close"></i>
+            </button>
+        </div>
+    }
+    @if (ViewBag.LoginSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show text-center" id="success-alert">
+            <strong>Success!</strong> Your account has been logged in successfully!
+            <button type="button" class="btn-close success-button close" data-dismiss="alert">
+                <i class="fa fa-window-close"></i>
+            </button>
+        </div>
+    }
+    @if (ViewBag.LogoutSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show text-center" id="success-alert">
+            <strong>Success!</strong> Your account has been logged out successfully!
+            <button type="button" class="btn-close success-button close" data-dismiss="alert">
+                <i class="fa fa-window-close"></i>
+            </button>
+        </div>
+    }
+    <div class="container">
+        <main role="main" class="pb-3" id="main-container">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>

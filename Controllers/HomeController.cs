@@ -333,9 +333,9 @@ namespace Capstone.Controllers
             _userRepository.UpdateInfo(profile);
             return Json(new { Success = "Success" });
         }
-        public IActionResult PrintDeliveryList()
+        public IActionResult DeliveryList()
         {
-            return View("PrintDeliveryList", _productRepository.GetAllUserOrders());
+            return new ViewAsPdf("DeliveryList", _productRepository.GetAllUserOrders());
         }
         //public IActionResult SendEmailTest()
         //{
@@ -360,10 +360,6 @@ namespace Capstone.Controllers
         //    ViewBag.msg = "email sent succesfuly";
         //    return View();
         //}
-        public IActionResult GetDeliveryList()
-        {
-           
-            return View();
-        }
+       
     }
 }

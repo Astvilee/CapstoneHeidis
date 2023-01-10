@@ -16,7 +16,7 @@
     <br />
     <br />
     <!-- PENDING -->
-    <button class="printlist text-right btn btn-primary float-right" type="button" >Print delivery list.</button>
+     <a class="btn btn-primary float-right " t href="/Admin/DeliveryList">Print Delivery list</a>
     <div class="p-2 m-3">
         <div class="accordion" id="accordionExample">
             <div>
@@ -135,7 +135,6 @@
                                 @item.Date
                             </button>
                         </div>
-
                         <div id="collapse-@item.Id" class="collapse show" aria-labelledby="heading-@item.Id" data-parent="#accordionExample">
                             <div class="card-body">
                                 <input class="order-id" type="hidden" value="@item.Id"/>
@@ -216,14 +215,10 @@
                         </div>
                     </div>
                 }
-
             }
         </div>
     </div>
-
-
     <!-- DELIVERED -->
-
     <div class="p-2 m-3">
         <div class="accordion" id="accordionExample">
             <div>
@@ -319,45 +314,15 @@
                         </div>
                     </div>
                 }
-
             }
         </div>
     </div>
-
 </div>
-
 
 @section Scripts {
     <script>
-        $(function () {
-            $('.approve-order').on('click', function () {
-                let orderId = $(this).parent().find('.order-id').val();
-                $.ajax({
-                    type: 'POST',
-                    url: "/Admin/ApproveOrder",
-                    data: { "orderId": orderId, },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.success) {
-                            window.location = "/Admin/ManageOrder"
-                        }
-                    }
-                });
-            });
-            
-            $('.confirm-delivery').on('click', function () {
-                let orderId = $(this).parent().find('.order-id').val();
-                $.ajax({
-                    type: 'POST',
-                    url: "/Admin/ConfirmDelivery",
-                    data: { "orderId": orderId, },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.success) {
-                            window.location = "/Admin/ManageOrder"
-                        }
-                    }
-                });
+            $('.printlist').on('click', function () {
+                location.href="Admin/DeliveryList";
             });
         });
     </script>

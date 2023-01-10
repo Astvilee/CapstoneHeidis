@@ -1232,5 +1232,8 @@ C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\Rotativa
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\Rotativa.AspNetCore.dll
-C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\PrintDeliveryList.cshtml.g.cs
-C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Home\PrintDeliveryList.cshtml.g.cs
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Home\DeliveryList.cshtml.g.cs
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\DeliveryList.cshtml.g.cs
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\SalesReport.cshtml.g.cs
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Shared\_CustomLayout.cshtml.g.cs
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Shared\_DeliveryReportLayout.cshtml.g.cs

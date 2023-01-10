@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Capstone.Data;
 using System.Net.Mail;
+using Rotativa.AspNetCore;
 
 namespace Capstone.Controllers
 {
@@ -179,6 +180,13 @@ namespace Capstone.Controllers
            
             return View();
         }
-
+        public IActionResult DeliveryList()
+        {
+            return new ViewAsPdf("DeliveryList", _productRepository.GetAllUserOrders());
+        }
+        public IActionResult SalesReport()
+        {
+            return new ViewAsPdf();
+        }
     }
 }

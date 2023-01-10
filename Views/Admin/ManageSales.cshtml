@@ -3,6 +3,7 @@
 @{
     var totalSales = Model.DeliveredOrders.Sum(x => x.ProductOrders.Sum(z => z.Quantity * z.Price));
     var monthlySales = Model.DeliveredOrders.Where(x => DateTime.Parse(x.Date.Replace("DATE: ", "").Replace("TIME: ", "")).Month == DateTime.Today.Month).Sum(x => x.ProductOrders.Sum(z => z.Price * z.Quantity));
+   
 }
 
 <br />
