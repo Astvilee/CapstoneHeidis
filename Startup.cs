@@ -14,6 +14,9 @@ using Capstone.Services;
 using Capstone.Services.IServices;
 using Capstone.Repository;
 using Capstone.Repository.IRepository;
+using System.Net.Mail;
+using System.Net;
+using Rotativa.AspNetCore;
 
 namespace Capstone
 {
@@ -34,23 +37,37 @@ namespace Capstone
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             //Services
+            services.AddScoped<IMailService, MailService>();
             services.AddScoped<ISessionService, SessionService>();
 
             //Repository
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddSingleton<SmtpClient>(options =>
+            {
+                return new SmtpClient()
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    Credentials = new NetworkCredential("heidiswaterpos@gmail.com", "hwymxdixdctwgkad"),
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    EnableSsl = true
+
+                };
+            });
+           
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
             });
-
+           
 
         }
-
+      
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -72,7 +89,7 @@ namespace Capstone
             app.UseAuthorization();
 
             app.UseSession();
-
+            Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath, "../Rotativa/Windows");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -111,6 +128,7 @@ namespace Capstone
                     pattern: "/About",
                     defaults: new { controller = "Home", action = "About" });
             });
+            
         }
     }
 }

@@ -12,22 +12,24 @@ using Capstone.ActionFilters;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Capstone.Data;
-
+using System.Net.Mail;
 
 namespace Capstone.Controllers
 {
     public class AdminController : Controller
     {
-
+        //private SmtpClient smtpClient;
         private readonly ISessionService _sessionService;
         private readonly IUserRepository _userRepository;
         private readonly IProductRepository _productRepository;
+        private readonly IMailService _mailService;
 
-        public AdminController(ISessionService sessionService, IUserRepository userRepository, IProductRepository productRepository)
+        public AdminController(ISessionService sessionService, IUserRepository userRepository, IProductRepository productRepository, IMailService mailService)
         {
             _sessionService = sessionService;
             _userRepository = userRepository;
             _productRepository = productRepository;
+            _mailService = mailService;
         }
 
         public IActionResult Index()
@@ -57,9 +59,14 @@ namespace Capstone.Controllers
         }
        
 
-        public IActionResult ApproveOrder(string orderId)
+        public async Task <IActionResult> ApproveOrder(string orderId)
         {
+
             _productRepository.ApproveOrder(orderId);
+            var email = _userRepository.GetUserEmailByOrderId(orderId);
+            await _mailService.SendEmail(email, "Your order #"+orderId+ "is approved", 
+            "Your order has been approved and now on shipping",new string[] {"info@heidiswater.com"});
+            
             return Json(new { Success = true});
         }
         public IActionResult ConfirmDelivery(string orderId)

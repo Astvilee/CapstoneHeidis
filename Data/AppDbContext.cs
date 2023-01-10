@@ -16,6 +16,7 @@ namespace Capstone.Data
         public virtual DbSet<ProductOrder> ProductOrders { get; set; }
         public virtual DbSet<CartProduct> CartProducts { get; set; }
         public virtual DbSet<ReturnedOrder> ReturnedOrders { get; set; }
+        public virtual DbSet<UserArchive> UserArchieve { get; set; }
         
     }
 }

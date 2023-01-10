@@ -6,6 +6,8 @@ using Capstone.Repository.IRepository;
 using Capstone.Utilities;
 using System.Collections.Generic;
 using System.Web;
+using MailKit.Search;
+
 namespace Capstone.Repository
 {
     public class UserRepository : IUserRepository
@@ -42,8 +44,7 @@ namespace Capstone.Repository
                 Password = dbUser.Password,
                 Phone = dbUser.Phone,
                 Barangay = dbUser.Barangay,
-                Profile = dbUser.Profile
-            ,
+                Profile = dbUser.Profile,
                 Role = dbUser.Role,
                 StreetAddress = dbUser.StreetAddress
             } : null;
@@ -77,7 +78,7 @@ namespace Capstone.Repository
 
         public UserViewModel GetUser(string email)
         {
-            var dbUser = _context.Users.FirstOrDefault(u => u.Email.ToLower().Equals(email.ToLower()));
+            var dbUser = _context.Users.FirstOrDefault(u => u.Email.ToLower().Equals(email.ToLower()) && u.isArchive==0);
             return (dbUser != null) ? new UserViewModel()
             {
                 Id = dbUser.Id,
@@ -111,7 +112,7 @@ namespace Capstone.Repository
 
         public List<UserViewModel> GetAllUsers()
         {
-            var dbUsers = _context.Users.ToList();
+            var dbUsers = _context.Users.Where(m => m.isArchive==0).ToList();
             List<UserViewModel> ListOfUsers = new List<UserViewModel>();
             foreach (var item in dbUsers)
             {
@@ -136,7 +137,7 @@ namespace Capstone.Repository
             User dbUser = _context.Users.Where(u => u.Id.ToString().Equals(id)).FirstOrDefault();
             if (dbUser != null)
             {
-                _context.Users.Remove(dbUser);
+                dbUser.isArchive = 1;
             }
             _context.SaveChanges();
             User check = _context.Users.Where(u => u.Id.ToString().Equals(id)).FirstOrDefault();
@@ -214,6 +215,21 @@ namespace Capstone.Repository
 
                 throw new Exception("Error in code: " + ex.Message);
             }
+        }
+        public string GenerateOtp()
+        {
+            Random otp = new Random();
+            //otp = otp.NextDouble((100000),(999999)).ToString();
+
+            return ToString();
+        }
+
+        public string GetUserEmailByOrderId(string orderId)
+        {
+            Order order = _context.Orders.Where(x => x.Id.ToString().Equals(orderId)).FirstOrDefault();
+            var userId = order.UserId;
+            var user = _context.Users.FirstOrDefault(m => m.Id == userId);
+            return user.Email;
         }
     }
     }

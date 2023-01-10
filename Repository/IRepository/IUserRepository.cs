@@ -21,5 +21,6 @@ namespace Capstone.Repository.IRepository
         public void UpdateInfo(ProfileViewModel profile);
         public string EncryptPassword(string password);
         public string DecryptPassword(string password);
+        public string GetUserEmailByOrderId(string orderId);
     }
 }

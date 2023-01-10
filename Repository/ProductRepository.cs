@@ -348,7 +348,7 @@ namespace Capstone.Repository
 
         public List<ManageInvetoryViewModel> GetAllProducts()
         {
-             var ListOfProducts = _context.Products.ToList();
+            var ListOfProducts = _context.Products.ToList();
             List<ManageInvetoryViewModel> productslist = new List<ManageInvetoryViewModel>();
             foreach (var item in ListOfProducts)
             {
@@ -363,6 +363,12 @@ namespace Capstone.Repository
 
 
         }
-        
+
+        public int GetProductCount(string name)
+        {
+            var product =_context.Products.FirstOrDefault(m => m.BaseName.Equals(name));
+            return product.Stocks;
+        }
+     
     }
 }

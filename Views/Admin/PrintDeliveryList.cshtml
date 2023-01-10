@@ -1,0 +1,31 @@
+﻿@model Capstone.ViewModels.ManageOrderViewModel
+@using Capstone.ViewModels
+@{
+
+}
+
+@{
+    
+    List<string> listofdelivery = new List<string>();
+    foreach (var item in Model.DeliveredOrders)
+    {
+        listofdelivery.Add(item.ToString());
+    }
+}
+<table class="table-bordered">
+    <thead>
+        <tr>
+            Deliveries
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.DeliveredOrders)
+        {
+            <tr>
+                <td>
+                    @item;
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

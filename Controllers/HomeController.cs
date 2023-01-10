@@ -12,11 +12,18 @@ using Capstone.Data;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Web;
+using System.Web.Helpers;
+using System.Net.Mail;
+using System.Net;
+using Rotativa.AspNetCore;
 
 namespace Capstone.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IMailService _mailService;
         private readonly ISessionService _sessionService;
         private readonly IUserRepository _userRepository;
         private readonly IProductRepository _productRepository;
@@ -106,7 +113,16 @@ namespace Capstone.Controllers
         {
             if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
             {
-                return View("Cart", _userRepository.GetCartViewModel(_sessionService.GetItems(SessionKeys.User, HttpContext)));
+                var CartItems = _userRepository.GetCartViewModel(_sessionService.GetItems(SessionKeys.User, HttpContext));
+                Dictionary<string, int> ProductStock = new Dictionary<string, int>();
+                foreach (var item in CartItems.Cart)
+                {
+                    ProductStock.Add(item.Name,_productRepository.GetProductCount(item.Name));
+                }
+                ViewBag.ProductStock = ProductStock;
+                Debug.WriteLine("#################################"+CartItems);
+                Debug.WriteLine("#################################" + ProductStock);
+                return View("Cart", CartItems);
             }
             else
             {
@@ -233,7 +249,6 @@ namespace Capstone.Controllers
         public IActionResult Register()
         {
             ViewBag.BarangayList = FunctionHelper.GetBarangayList().Select((value, index) => new { value, index }).Select(x => new SelectListItem() { Value = x.index.ToString(), Text = x.value });
-
             return View("Register", new UserViewModel());
         }
 
@@ -318,6 +333,37 @@ namespace Capstone.Controllers
             _userRepository.UpdateInfo(profile);
             return Json(new { Success = "Success" });
         }
-
+        public IActionResult PrintDeliveryList()
+        {
+            return View("PrintDeliveryList", _productRepository.GetAllUserOrders());
+        }
+        //public IActionResult SendEmailTest()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public IActionResult SendEmailTest(string useremail)
+        //{
+        //    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+        //    smtpClient.Credentials = new System.Net.NetworkCredential("heidiswaterpos@gmail.com", "hwymxdixdctwgkad");
+        //    // smtpClient.UseDefaultCredentials = true; // uncomment if you don't want to use the network credentials
+        //    smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+        //    smtpClient.EnableSsl = true;
+        //    MailMessage mail = new MailMessage();
+        //    //Setting From , To and CC
+        //    mail.From = new MailAddress("info@heidiswater.com", "Heidis Water");
+        //    mail.To.Add(new MailAddress(useremail));
+        //    mail.Subject = "Verification lang";
+        //    mail.Body = "PUTANGINA GUMANA DIN HAYOP KA";
+        //    mail.CC.Add(new MailAddress("info@heidiswater.com"));
+        //    smtpClient.Send(mail);
+        //    ViewBag.msg = "email sent succesfuly";
+        //    return View();
+        //}
+        public IActionResult GetDeliveryList()
+        {
+           
+            return View();
+        }
     }
 }
