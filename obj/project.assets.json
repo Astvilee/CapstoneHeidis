@@ -10486,19 +10486,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\i5 9th gen\\.nuget\\packages\\": {}
+    "C:\\Users\\reden\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\i5 9th gen\\source\\repos\\HeidisCapstoneProject\\Capstone.csproj",
+      "projectUniqueName": "C:\\Users\\reden\\source\\repos\\CapstoneHeidis\\Capstone.csproj",
       "projectName": "Capstone",
-      "projectPath": "C:\\Users\\i5 9th gen\\source\\repos\\HeidisCapstoneProject\\Capstone.csproj",
-      "packagesPath": "C:\\Users\\i5 9th gen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\i5 9th gen\\source\\repos\\HeidisCapstoneProject\\obj\\",
+      "projectPath": "C:\\Users\\reden\\source\\repos\\CapstoneHeidis\\Capstone.csproj",
+      "packagesPath": "C:\\Users\\reden\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\reden\\source\\repos\\CapstoneHeidis\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\i5 9th gen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\reden\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10616,7 +10616,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   },
