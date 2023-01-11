@@ -334,7 +334,8 @@ namespace Capstone.Controllers
             {
                 _userRepository.UpdatePassword(email, pass);
             }
-            return RedirectToAction();
+            return Redirect("/Login");
+           
         }
 
         public async Task<IActionResult> ResetPassword(string email, string code)
@@ -356,10 +357,9 @@ namespace Capstone.Controllers
                         return RedirectToAction("Login");
                     }
                 }
-
                 string resetcode = Guid.NewGuid().ToString();
                 await _mailService.SendEmail(email, "Password reset request", $"You can reset your password <a href='http://{domain}/resetPassword?email={email}&code={resetcode}'>here</a>", new string[] { "info@heidiswater.com" });
-                _userRepository.SetResetPasswordCode(email, code);
+                _userRepository.SetResetPasswordCode(email, resetcode);
                 ViewBag.CurrentPassword = _userRepository.DecryptPassword(_userRepository.GetUserPasswordByEmail(email));
                 return RedirectToAction("SentResetPassword");
             }
