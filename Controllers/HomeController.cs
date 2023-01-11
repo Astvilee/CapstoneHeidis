@@ -20,6 +20,7 @@ using System.Net;
 using Rotativa.AspNetCore;
 using MailKit.Search;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Capstone.Controllers
 {
@@ -325,17 +326,42 @@ namespace Capstone.Controllers
             ViewBag.Result = false;
             return View();
         }
-        public async Task<IActionResult> ResetPassword(string email)
+
+        public IActionResult ConfirmResetPassword(string email, string pass, string confirmPass)
         {
-            
+
+            if(pass.Equals(confirmPass))
+            {
+                _userRepository.UpdatePassword(email, pass);
+            }
+            return RedirectToAction();
+        }
+
+        public async Task<IActionResult> ResetPassword(string email, string code)
+        {
+            string domain = HttpContext.Request.Host.Value;
+
             if (_userRepository.IsEmailExist(email))
             {
-                string resetcode = Guid.NewGuid().ToString();
-                await _mailService.SendEmail(email, "Password reset request",
-                "You can reset your password <a href='https://localhost:44338/Home/ResetPassword'>here</a>", new string[] { "info@heidiswater.com" });
-                ViewBag.CurrentPassword = _userRepository.DecryptPassword(_userRepository.GetUserPasswordByEmail(email));
-                return View();
+                if(code != null)
+                {
+                    if(_userRepository.ValidateResetCode(email, code))
+                    {
+                        // galing sa link                    
+                        ViewBag.Email = email;
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login");
+                    }
+                }
 
+                string resetcode = Guid.NewGuid().ToString();
+                await _mailService.SendEmail(email, "Password reset request", $"You can reset your password <a href='http://{domain}/resetPassword?email={email}&code={resetcode}'>here</a>", new string[] { "info@heidiswater.com" });
+                _userRepository.SetResetPasswordCode(email, code);
+                ViewBag.CurrentPassword = _userRepository.DecryptPassword(_userRepository.GetUserPasswordByEmail(email));
+                return RedirectToAction("SentResetPassword");
             }
             else
             {
@@ -344,6 +370,12 @@ namespace Capstone.Controllers
             }
             
         }
+
+        public IActionResult SentResetPassword()
+        {
+            return View();
+        }
+
         public IActionResult ReturnProduct(int ProductId, int Quantity, int UserId, int OrderId)
         {
             if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))

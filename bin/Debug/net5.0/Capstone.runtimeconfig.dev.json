@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\i5 9th gen\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\i5 9th gen\\.nuget\\packages"
+      "C:\\Users\\reden\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\reden\\.nuget\\packages"
     ]
   }
 }

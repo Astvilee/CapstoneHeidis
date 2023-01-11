@@ -266,6 +266,38 @@ namespace Capstone.Repository
             return userpass;
         }
 
+        public void SetResetPasswordCode(string email, string code)
+        {
+            var user = _context.Users.FirstOrDefault(m => m.Email.ToLower().Equals(email.ToLower()));
+            if(user != null)
+            {
+                user.PasswordResetCode = code;
+            }
+
+            _context.SaveChanges();
+        }
+
+        public bool ValidateResetCode(string email, string code)
+        {
+            var user = _context.Users.FirstOrDefault(m => m.Email.ToLower().Equals(email.ToLower()));
+            if(user != null )
+            {
+                return user.PasswordResetCode.ToLower().Equals(code.ToLower());
+            } else
+            {
+                return false;
+            }
+        }
+
+        public void UpdatePassword(string email, string pass)
+        {
+            var user = _context.Users.FirstOrDefault(m => m.Email.ToLower().Equals(email.ToLower()));
+            if(user != null)
+            {
+                user.Password = EncryptPassword(pass);
+            }
+            _context.SaveChanges();
+        }
     }
-    }
+}
 
