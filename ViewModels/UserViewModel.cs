@@ -5,6 +5,7 @@ namespace Capstone.ViewModels
     public class UserViewModel
     {
         public int Id { get; set; }
+        public int Otp { get; set; }
         public string Role { get; set; }
         public string Profile { get; set; }
         [Display(Name = "Email Address")]

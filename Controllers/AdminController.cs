@@ -65,8 +65,8 @@ namespace Capstone.Controllers
 
             _productRepository.ApproveOrder(orderId);
             var email = _userRepository.GetUserEmailByOrderId(orderId);
-            await _mailService.SendEmail(email, "Your order #"+orderId+ "is approved", 
-            "Your order has been approved and now on shipping",new string[] {"info@heidiswater.com"});
+            await _mailService.SendEmail(email, "Your order #"+orderId+ "is approved",
+            "Your order has been approved and now on shipping <a href='http://www.yoursite.com'>here</a>", new string[] {"info@heidiswater.com"});
             
             return Json(new { Success = true});
         }

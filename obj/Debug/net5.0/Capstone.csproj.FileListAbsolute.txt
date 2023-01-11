@@ -1218,7 +1218,6 @@ C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\System.W
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\System.Web.WebPages.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
-C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Home\SendEmailTest.cshtml.g.cs
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\MailKit.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\MimeKit.dll
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\bin\Debug\net5.0\BouncyCastle.Crypto.dll
@@ -1237,3 +1236,6 @@ C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Vi
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Admin\SalesReport.cshtml.g.cs
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Shared\_CustomLayout.cshtml.g.cs
 C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Shared\_DeliveryReportLayout.cshtml.g.cs
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Home\VerifyRegistration.cshtml.g.cs
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Home\ForgotPassword.cshtml.g.cs
+C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\obj\Debug\net5.0\Razor\Views\Home\ResetPassword.cshtml.g.cs

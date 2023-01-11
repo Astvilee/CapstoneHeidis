@@ -20,6 +20,7 @@ namespace Capstone.Services
             mail.From = new MailAddress("info@heidiswater.com", "Heidis Water");
             mail.To.Add(new MailAddress(to));
             mail.Subject = subject;
+            mail.IsBodyHtml = true;
             mail.Body = body;
             foreach (var item in cc)
             {

@@ -23,7 +23,7 @@ namespace Capstone.Repository
         {
             if (IsExist(user) == null)
             {
-                _context.Users.Add(new User() { Email = user.Email, Password = user.Password, StreetAddress = user.StreetAddress, Barangay = user.Barangay, Phone = user.Phone, Profile = user.Profile, Role = SessionKeys.UserAccessRoleDefault });
+                _context.Users.Add(new User() { Email = user.Email,Otp=user.Otp,Password = user.Password, StreetAddress = user.StreetAddress, Barangay = user.Barangay, Phone = user.Phone, Profile = user.Profile, Role = SessionKeys.UserAccessRoleDefault });
                 _context.SaveChanges();
             }
         }
@@ -75,7 +75,15 @@ namespace Capstone.Repository
             var dbUser = _context.Users.FirstOrDefault(u => u.Email.ToLower().Equals(email.ToLower()) && u.Password.Equals(password));
             return (dbUser != null) ? true : false;
         }
-
+        public bool VerifyUserLogin(string email, string password)
+        {
+            if (email == null || password == null)
+            {
+                return false;
+            }
+            var dbUser = _context.Users.FirstOrDefault(u => u.Email.ToLower().Equals(email.ToLower()) && u.Password.Equals(password) && u.isVerified == 1);
+            return (dbUser != null) ? true : false;
+        }
         public UserViewModel GetUser(string email)
         {
             var dbUser = _context.Users.FirstOrDefault(u => u.Email.ToLower().Equals(email.ToLower()) && u.isArchive==0);
@@ -216,14 +224,6 @@ namespace Capstone.Repository
                 throw new Exception("Error in code: " + ex.Message);
             }
         }
-        public string GenerateOtp()
-        {
-            Random otp = new Random();
-            //otp = otp.NextDouble((100000),(999999)).ToString();
-
-            return ToString();
-        }
-
         public string GetUserEmailByOrderId(string orderId)
         {
             Order order = _context.Orders.Where(x => x.Id.ToString().Equals(orderId)).FirstOrDefault();
@@ -231,6 +231,41 @@ namespace Capstone.Repository
             var user = _context.Users.FirstOrDefault(m => m.Id == userId);
             return user.Email;
         }
+        public string GetUserIdByEmail(string email)
+        {
+            var currentuser= _context.Users.FirstOrDefault(m => m.Email.Equals(email));
+            return currentuser.Id.ToString();
+        }
+        public bool VerifyUserById(string id,string code)
+        {
+            var user = _context.Users.FirstOrDefault(m => m.Id.ToString().Equals(id));
+            if (user != null)
+            {
+                if (user.Otp.ToString().Equals(code))
+                {
+                    user.isVerified = 1;
+                    _context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                   return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+       
+        public string GetUserPasswordByEmail(string email)
+        {
+            var user = _context.Users.FirstOrDefault(m => m.Email.Equals(email));
+            var userpass = user.Password;
+            return userpass;
+        }
+
     }
     }
 

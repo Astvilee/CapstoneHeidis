@@ -1,0 +1,32 @@
+﻿@model Capstone.ViewModels.UserViewModel
+@{
+    var id = ViewBag.UserId;
+    var failed = ViewBag.Status;
+}
+<br />
+<br />
+<br />
+<div class="container">
+    <form asp-controller="Home" asp-action="VerifyRegistration">
+        <table>
+            <input type="hidden" name="id" value="@id"/>
+            
+            <tr>
+                <td>Enter verification code: 
+                </td>
+                <td>
+                    @if (failed)
+                    {
+                        <p>
+                            Incorrect, Try again.
+                        </p>
+                    }
+                    <input type="text" name="code"/>
+                </td>
+            </tr>
+            <tr>
+                <button class="btn btn-primary float-right">Submit</button>
+            </tr>
+        </table>
+    </form>
+</div>

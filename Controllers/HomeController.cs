@@ -18,6 +18,8 @@ using System.Web.Helpers;
 using System.Net.Mail;
 using System.Net;
 using Rotativa.AspNetCore;
+using MailKit.Search;
+using System.Threading.Tasks;
 
 namespace Capstone.Controllers
 {
@@ -28,11 +30,12 @@ namespace Capstone.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IProductRepository _productRepository;
 
-        public HomeController(ISessionService sessionService, IUserRepository userRepository, IProductRepository productRepository)
+        public HomeController(ISessionService sessionService, IUserRepository userRepository, IProductRepository productRepository, IMailService mailService)
         {
             _sessionService = sessionService;
             _userRepository = userRepository;
             _productRepository = productRepository;
+            _mailService = mailService;
         }
 
         public IActionResult Index()
@@ -216,7 +219,10 @@ namespace Capstone.Controllers
             {
                 ModelState.AddModelError("Email", "Email or Password is incorrect, try again");
             }
-
+            if (!_userRepository.VerifyUserLogin(user.Email, _userRepository.EncryptPassword(user.Password)))
+            {
+                ModelState.AddModelError("Verification", "Your account is not yet verified.");
+            }
             if (!ModelState.IsValid)
             {
                 return Redirect("/Login");
@@ -254,7 +260,7 @@ namespace Capstone.Controllers
 
         [HttpPost]
         [ExportModelState]
-        public IActionResult RegisterUser(UserViewModel user)
+        public async Task <IActionResult> RegisterUser(UserViewModel user)
         {
             if (_userRepository.IsEmailExist(user.Email))
             {
@@ -290,11 +296,54 @@ namespace Capstone.Controllers
                 phoneNumber = formattedPhoneNumber;
             }
             var encryptpass = _userRepository.EncryptPassword(user.Password.ToString());
-            _userRepository.Create(new UserViewModel() { Email = user.Email, Password = encryptpass, Barangay = FunctionHelper.GetBarangayList()[int.Parse(user.Barangay)], StreetAddress = user.StreetAddress, Phone = phoneNumber, Profile = user.Profile });
+            Random random = new Random();
+            int otp = random.Next(100000, 999999);
+            _userRepository.Create(new UserViewModel() { Email = user.Email,Otp= otp, Password = encryptpass, Barangay = FunctionHelper.GetBarangayList()[int.Parse(user.Barangay)], StreetAddress = user.StreetAddress, Phone = phoneNumber, Profile = user.Profile });
+            ViewBag.UserId = _userRepository.GetUserIdByEmail(user.Email);
+            ViewBag.Status = false;
+            await _mailService.SendEmail(user.Email, "Your verification code is " + otp,
+            "This code can be used to verify your account.", new string[] { "info@heidiswater.com" });
             TempData["register-success"] = true;
-            return RedirectToAction("Index");
+            return View("VerifyRegistration");
         }
+        public IActionResult VerifyRegistration(string id,string code)
+        {
+            ViewBag.UserId = id;
+            if (_userRepository.VerifyUserById(id, code))
+            {
+                return Redirect("/Login");
+            }
+            else
+            {
+                ViewBag.Status = true;;
+                return View("VerifyRegistration");
+            }
+            
+        }
+        public IActionResult ForgotPassword(string email)
+        {
+            ViewBag.Result = false;
+            return View();
+        }
+        public async Task<IActionResult> ResetPassword(string email)
+        {
+            
+            if (_userRepository.IsEmailExist(email))
+            {
+                string resetcode = Guid.NewGuid().ToString();
+                await _mailService.SendEmail(email, "Password reset request",
+                "You can reset your password <a href='https://localhost:44338/Home/ResetPassword'>here</a>", new string[] { "info@heidiswater.com" });
+                ViewBag.CurrentPassword = _userRepository.DecryptPassword(_userRepository.GetUserPasswordByEmail(email));
+                return View();
 
+            }
+            else
+            {
+                ViewBag.Result = true;
+                return View("ForgotPassword");
+            }
+            
+        }
         public IActionResult ReturnProduct(int ProductId, int Quantity, int UserId, int OrderId)
         {
             if (_sessionService.GetItems(SessionKeys.UserAccessStatus, HttpContext).Equals(SessionKeys.UserAccessStatusLoggedIn))
@@ -337,29 +386,8 @@ namespace Capstone.Controllers
         {
             return new ViewAsPdf("DeliveryList", _productRepository.GetAllUserOrders());
         }
-        //public IActionResult SendEmailTest()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public IActionResult SendEmailTest(string useremail)
-        //{
-        //    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-        //    smtpClient.Credentials = new System.Net.NetworkCredential("heidiswaterpos@gmail.com", "hwymxdixdctwgkad");
-        //    // smtpClient.UseDefaultCredentials = true; // uncomment if you don't want to use the network credentials
-        //    smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-        //    smtpClient.EnableSsl = true;
-        //    MailMessage mail = new MailMessage();
-        //    //Setting From , To and CC
-        //    mail.From = new MailAddress("info@heidiswater.com", "Heidis Water");
-        //    mail.To.Add(new MailAddress(useremail));
-        //    mail.Subject = "Verification lang";
-        //    mail.Body = "PUTANGINA GUMANA DIN HAYOP KA";
-        //    mail.CC.Add(new MailAddress("info@heidiswater.com"));
-        //    smtpClient.Send(mail);
-        //    ViewBag.msg = "email sent succesfuly";
-        //    return View();
-        //}
        
+      
+
     }
 }

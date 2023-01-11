@@ -18,6 +18,7 @@ namespace Capstone.Data
         public int isArchive { get; set; }
         public int isVerified { get; set; } //0-verified 1-unverified
         public int Otp { get; set; }
+        public string PasswordResetCode { get; set; }
         public ICollection<Order> Orders { get; set; }
         public ICollection<CartProduct> CartProducts { get; set; }
     }

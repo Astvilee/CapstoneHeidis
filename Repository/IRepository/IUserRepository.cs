@@ -22,5 +22,9 @@ namespace Capstone.Repository.IRepository
         public string EncryptPassword(string password);
         public string DecryptPassword(string password);
         public string GetUserEmailByOrderId(string orderId);
+        public string GetUserIdByEmail(string email);
+        public bool VerifyUserById(string id, string code);
+        public bool VerifyUserLogin(string email, string password);
+        public string GetUserPasswordByEmail(string email);
     }
 }

@@ -321,9 +321,43 @@
 
 @section Scripts {
     <script>
+        $(function () {
             $('.printlist').on('click', function () {
-                location.href="Admin/DeliveryList";
+                location.href = "Admin/DeliveryList";
+            });
+            $('.approve-order').on('click', function () {
+                let orderId = $(this).parent().find('.order-id').val();
+                $.ajax({
+                    type: 'POST',
+                    url: "/Admin/ApproveOrder",
+                    data: { "orderId": orderId, },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            window.location = "/Admin/ManageOrder"
+                        }
+                    }
+                });
+            });
+            
+            $('.confirm-delivery').on('click', function () {
+                let orderId = $(this).parent().find('.order-id').val();
+                $.ajax({
+                    type: 'POST',
+                    url: "/Admin/ConfirmDelivery",
+                    data: { "orderId": orderId, },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            window.location = "/Admin/ManageOrder"
+                        }
+                    }
+                });
             });
         });
+       
     </script>
 }
+
+
+                 

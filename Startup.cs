@@ -55,7 +55,7 @@ namespace Capstone
                     Credentials = new NetworkCredential("heidiswaterpos@gmail.com", "hwymxdixdctwgkad"),
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     EnableSsl = true
-
+                   
                 };
             });
            

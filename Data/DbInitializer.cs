@@ -17,7 +17,7 @@ namespace Capstone.Data
             string EncryptedPassword = Convert.ToBase64String(EncDataByte);
             if (context.Users.Where(m => m.Email.Equals("admin@admin.com")).ToList().Count() <= 0)
             {
-                context.Users.Add(new User() { Email = "admin@admin.com", Password = EncryptedPassword, Role = "Admin", Phone = "123456789" });
+                context.Users.Add(new User() { Email = "admin@admin.com", Password = EncryptedPassword, Role = "Admin", Phone = "123456789" , isVerified=1});
                 context.SaveChanges();
             }
             if (context.Products.ToList().Count()<=0)
