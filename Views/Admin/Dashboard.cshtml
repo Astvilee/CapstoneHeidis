@@ -7,12 +7,31 @@
     
 }
 <style>
-    h1,h3 {
-        font-size: 3rem;
-        font-weight: bold;
-    }
     p{
-        font-size : 30px;
+        font-size : 25px;
+    }
+    .wrap-content{
+        display:grid;
+        column-count: 12;
+        column-gap: 15px;
+    }
+    .orders{
+        grid-row-start : 1;
+        grid-column-start : 1;
+        column-gap: 15px;
+        grid-column-end : 4;
+    }
+    .customers{
+        grid-row-start: 1;
+        grid-column-start: 4;
+        column-gap: 15px;
+        grid-column-end: 8;
+    }
+    .inventory {
+        grid-row-start: 1;
+        grid-column-start: 8;
+        column-gap: 15px;
+        grid-column-end: 12;
     }
 </style>
 <br />
@@ -26,30 +45,31 @@
     var loweststockcount = loweststock.Stocks;
 
 }
-<h1>ADMIN DASHBOARD</h1>
+<h2>ADMIN DASHBOARD</h2>
 <div class="container">
-    <div class="orders">
-        <h3>Orders</h3>
-        <p>Total Orders : @totalorders</p>
-        <p>Pending Orders : @Model.PendingOrders.Count()</p>
-        <p>Shipped Orders : @Model.ShippedOrders.Count()</p>
-        <p>Delivered Orders: @Model.DeliveredOrders.Count()</p>
+    <div class="wrap-content">
+        <div class="orders">
+            <h2>Orders</h2>
+            <p>Total Orders : @totalorders</p>
+            <p>Pending Orders : @Model.PendingOrders.Count()</p>
+            <p>Shipped Orders : @Model.ShippedOrders.Count()</p>
+            <p>Delivered Orders: @Model.DeliveredOrders.Count()</p>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="customers">
+            <h2>Customers</h2>
+            <p>Total registered user : @Users.Count()</p>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="inventory">
+            <h2>Inventory</h2>
+            <p>Lowest stock in inventory:  </p>
+            <p>Item name : @loweststockname</p>
+            <p>Stocks left: @loweststockcount</p>
+        </div>
     </div>
-    <br />
-    <br />
-    <br />
-    <div>
-        <h3>Customers</h3>
-        <p>Total registered user : @Users.Count()</p>
-    </div>
-    <br />
-    <br />
-    <br />
-    <div>
-        <h3>Inventory</h3>
-        <p>Lowest stock in inventory:  </p>
-        <p>Item name : @loweststockname</p>
-        <p>Stocks left: @loweststockcount</p>
-    </div>
-    
 </div>

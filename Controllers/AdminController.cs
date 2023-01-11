@@ -186,7 +186,7 @@ namespace Capstone.Controllers
         }
         public IActionResult SalesReport()
         {
-            return new ViewAsPdf();
+            return new ViewAsPdf("SalesReport", _productRepository.GetAllUserOrders());
         }
     }
 }
