@@ -88,6 +88,7 @@ using Capstone.Utilities;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f20ad9775ffadcbe8437227ad3582d73056165f38308", async() => {
 <<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caafe95f8c9c3299353d1b78e3a33835d928f4cf8356", async() => {
 =======
@@ -102,6 +103,7 @@ using Capstone.Utilities;
 #line hidden
 #nullable disable
                 WriteLiteral("</title>\r\n    ");
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f20ad9775ffadcbe8437227ad3582d73056165f38931", async() => {
 <<<<<<< HEAD
                 __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "caafe95f8c9c3299353d1b78e3a33835d928f4cf8991", async() => {
 =======
@@ -121,6 +123,7 @@ using Capstone.Utilities;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css\">\r\n    ");
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f20ad9775ffadcbe8437227ad3582d73056165f310227", async() => {
 <<<<<<< HEAD
                 __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "caafe95f8c9c3299353d1b78e3a33835d928f4cf10287", async() => {
 =======
@@ -225,10 +228,12 @@ using Capstone.Utilities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f20ad9775ffadcbe8437227ad3582d73056165f314388", async() => {
 <<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caafe95f8c9c3299353d1b78e3a33835d928f4cf14524", async() => {
                 WriteLiteral("\r\n");
 #nullable restore
+#line 97 "C:\Users\reden\source\repos\CapstoneHeidis\Views\Shared\_Layout.cshtml"
 #line 102 "C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\Views\Shared\_Layout.cshtml"
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f20ad9775ffadcbe8437227ad3582d73056165f314388", async() => {
@@ -310,6 +315,7 @@ using Capstone.Utilities;
         </div>
 ");
 #nullable restore
+#line 123 "C:\Users\reden\source\repos\CapstoneHeidis\Views\Shared\_Layout.cshtml"
 <<<<<<< HEAD
 #line 128 "C:\Users\i5 9th gen\source\repos\HeidisCapstoneProject\Views\Shared\_Layout.cshtml"
 =======
