@@ -127,6 +127,10 @@ namespace Capstone
                     name: "About",
                     pattern: "/About",
                     defaults: new { controller = "Home", action = "About" });
+                endpoints.MapControllerRoute(
+                    name: "ResetPassword",
+                    pattern: "/resetPassword",
+                    defaults: new { controller = "Home", action = "ResetPassword" });
             });
             
         }

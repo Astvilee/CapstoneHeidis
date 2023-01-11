@@ -1,4 +1,4 @@
-﻿using Capstone.Data;
+using Capstone.Data;
 using Capstone.ViewModels;
 using System.Collections.Generic;
 
@@ -27,7 +27,5 @@ namespace Capstone.Repository.IRepository
         bool VerifyUserLogin(string email, string password);
         string GetUserPasswordByEmail(string email);
         void SetResetPasswordCode(string email, string code);
-        bool ValidateResetCode(string email, string code);
-        void UpdatePassword(string email, string pass);
     }
 }
